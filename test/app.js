@@ -4,24 +4,12 @@ module.exports = function(app)
     app.post("/api/test", createMessage);
     app.delete("/api/test/:id", deleteMessage);
 
-    var connectionString = 'mongodb://stella:Jwt!19880906@cluster0-shard-00-00-7yexl.mongodb.net:27017,cluster0-shard-00-01-7yexl.mongodb.net:27017,cluster0-shard-00-02-7yexl.mongodb.net:27017/admin?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin/test';
+    var MongoClient = require('mongodb').MongoClient;
 
-    if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-        connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-            process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-            process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-            process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-            process.env.OPENSHIFT_APP_NAME;
-    }
-
-    var mongoose = require("mongoose");
-    mongoose.connect(connectionString);
-
-    var TestSchema = mongoose.Schema({
-        message: String
+    var uri = "mongodb://stella:Jwt!19880906@cluster0-shard-00-00-7yexl.mongodb.net:27017,cluster0-shard-00-01-7yexl.mongodb.net:27017,cluster0-shard-00-02-7yexl.mongodb.net:27017/admin?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
+    MongoClient.connect(uri, function(err, db) {
+        db.close();
     });
-
-    var TestModel = mongoose.model("TestModel", TestSchema);
 
     function findAllMessages(req, res) {
         TestModel
