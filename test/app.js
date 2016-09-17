@@ -4,7 +4,7 @@ module.exports = function(app)
     app.post("/api/test", createMessage);
     app.delete("/api/test/:id", deleteMessage);
 
-    var connectionString = 'mongodb://stella:Jwt!19880906@cluster0-shard-00-00-7yexl.mongodb.net:27017,cluster0-shard-00-01-7yexl.mongodb.net:27017,cluster0-shard-00-02-7yexl.mongodb.net:27017/admin?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin';
+    var connectionString = 'mongodb://stella:Jwt!19880906@cluster0-shard-00-00-7yexl.mongodb.net:27017,cluster0-shard-00-01-7yexl.mongodb.net:27017,cluster0-shard-00-02-7yexl.mongodb.net:27017/admin?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin/test';
 
     if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
