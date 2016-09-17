@@ -4,8 +4,8 @@ module.exports = function(app)
     app.post("/api/test", createMessage);
     app.delete("/api/test/:id", deleteMessage);
 
-    var uri = "mongodb://stella:Jwt!19880906@cluster0-shard-00-00-7yexl.mongodb.net:27017,cluster0-shard-00-01-7yexl.mongodb.net:27017,cluster0-shard-00-02-7yexl.mongodb.net:27017/admin?ssl=true&replicaSet=Cluster0-shard-0&database=test&authSource=admin";
-
+    //var uri = "mongodb://stella:Jwt!19880906@cluster0-shard-00-00-7yexl.mongodb.net:27017,cluster0-shard-00-01-7yexl.mongodb.net:27017,cluster0-shard-00-02-7yexl.mongodb.net:27017/admin?ssl=true&replicaSet=Cluster0-shard-0&database=test&authSource=admin";
+    var uri = "mongodb://stella:Jwt!19880906@ds033116.mlab.com:33116/stellajiang";
     var mongoose = require("mongoose");
     mongoose.Promise = global.Promise;
     mongoose.connect(uri);
