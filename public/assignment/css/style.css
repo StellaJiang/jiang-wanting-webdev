@@ -3,5 +3,23 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 53px;
+    height: 100%;
+}
+
+.table.table-borderless tbody,
+.table.table-borderless tr,
+.table.table-borderless td,
+.table.table-borderless th {
+    border:none;
+}
+
+.border-right {
+    border-right: 1px solid black;
+    height: 100%;
+}
+
+html
+{
+    height: 100%;
 }
