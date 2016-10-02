@@ -10,6 +10,7 @@ body {
 .table.table-borderless,
 .table.table-borderless th{
     border:none;
+    color: #428bca;
 }
 
 .border-right {
@@ -36,4 +37,47 @@ html
 }
 .zero-right-padding {
     padding-right: 0px;
+}
+
+.navbar-brand {
+    color:white;
+
+}
+
+.navbar-header {
+    width: 100%;
+}
+
+.navbar-text {
+    color:white;
+}
+
+.container-fluid,
+.col-xs-4,
+.col-xs-12,
+.col-sm-8{
+    height: 100%;
+}
+
+.icon {
+    text-align: right;
+}
+
+.lheader {
+    color:black;
+    font-size:40px;
+}
+
+.mheader {
+    color:black;
+    font-size:20px;
+}
+
+.sheader {
+    color:black;
+    font-size:10px;
+}
+
+.glyphicon-menu-hamburger {
+    color: black;
 }
