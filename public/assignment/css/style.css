@@ -7,10 +7,8 @@ body {
     height: 100%;
 }
 
-.table.table-borderless tbody,
-.table.table-borderless tr,
-.table.table-borderless td,
-.table.table-borderless th {
+.table.table-borderless,
+.table.table-borderless th{
     border:none;
 }
 
