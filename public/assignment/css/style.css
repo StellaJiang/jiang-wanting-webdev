@@ -52,6 +52,10 @@ html
     color:white;
 }
 
+.navbar-link {
+    color:white;
+}
+
 .container-fluid,
 .col-xs-4,
 .col-xs-12,

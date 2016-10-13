@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../css/style.css" rel="stylesheet"/>
-    <title>Widget Youtube</title>
+    <title>Widget Image</title>
 </head>
 <body>
 
@@ -13,16 +13,16 @@
     <div class="container-fluid row">
         <div class="col-xs-12 col-sm-12">
             <div class="navbar-header">
-                <a class="navbar-brand" href="widget-list.html">
-                    <span class="glyphicon glyphicon-chevron-left">
-                    </span>
+                <a class="navbar-brand" href="widget-list.view.client.html">
+                                <span class="glyphicon glyphicon-chevron-left">
+                                </span>
                 </a>
                 <a class="navbar-brand">
                     Edit Widget
                 </a>
-                <a class="navbar-text pull-right" href="widget-list.html">
-                    <span class="glyphicon glyphicon-ok">
-                    </span>
+                <a class="navbar-text pull-right" href="widget-list.view.client.html">
+                        <span class="glyphicon glyphicon-ok">
+                        </span>
                 </a>
             </div>
         </div>
@@ -33,7 +33,7 @@
     <form>
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Video Name">
+            <input type="text" class="form-control" id="name" placeholder="Image Name">
         </div>
         <div class="form-group">
             <label for="text">Text</label>
@@ -41,20 +41,24 @@
         </div>
         <div class="form-group">
             <label for="url">URL</label>
-            <input type="text"  class="form-control" id="url" placeholder="https://www.youtube.com/embed/uLWLashCXHE">
+            <input type="text"  class="form-control" id="url" placeholder="https://i.kinja-img.com/gawker-media/image">
         </div>
         <div class="form-group">
             <label for="width">Width</label>
             <input type="text"  class="form-control" id="width" placeholder="100%">
         </div>
+        <div class="form-group">
+            <label for="upload">Upload</label>
+            <input type="file"  class="form-control" id="upload" placeholder="No file chosen">
+        </div>
     </form>
     <a class="btn btn-danger  btn-block"
-       href="widget-list.html">Delete</a>
+       href="widget-list.view.client.html">Delete</a>
 </div>
 
 <nav class="navbar navbar-dark bg-primary navbar-fixed-bottom">
     <div class="container">
-        <a class="navbar-text pull-right" href="../profile.html">
+        <a class="navbar-text pull-right" href="../user/profile.view.client.html">
             <span class="glyphicon glyphicon-user"></span>
         </a>
     </div>

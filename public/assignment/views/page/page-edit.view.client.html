@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../css/style.css" rel="stylesheet"/>
-    <title>Page New</title>
+    <title>Page Edit</title>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
     <div class="container-fluid row">
         <div class="col-xs-4 hidden-xs">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../website/website-list.html">
+                <a class="navbar-brand" href="../website/website-list.view.client.html">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
                 </a>
@@ -22,7 +22,7 @@
                     Page
                 </a>
 
-                <a class="navbar-text pull-right" href="page-new.html">
+                <a class="navbar-text pull-right" href="page-new.view.client.html">
                         <span class="glyphicon glyphicon-plus">
                         </span>
                 </a>
@@ -30,15 +30,15 @@
         </div>
         <div class="col-xs-12 col-sm-8">
             <div class="navbar-header">
-                <a class="navbar-brand hidden-sm hidden-md hidden-lg" href="page-list.html">
+                <a class="navbar-brand hidden-sm hidden-md hidden-lg" href="page-list.view.client.html">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
                 </a>
                 <a class="navbar-brand">
-                    New Page
+                    Page Edit
                 </a>
 
-                <a class="navbar-text pull-right" href="page-list.html">
+                <a class="navbar-text pull-right" href="page-list.view.client.html">
                         <span class="glyphicon glyphicon-ok">
                         </span>
                 </a>
@@ -61,12 +61,12 @@
             <tr>
                 <th class="hidden">ID</th>
                 <th >
-                    <a href="../widget/widget-list.html">
+                    <a href="../widget/widget-list.view.client.html">
                         Home
                     </a>
                 </th>
                 <th class="icon">
-                    <a href="page-edit.html">
+                    <a href="page-edit.view.client.html">
                                     <span class="glyphicon glyphicon-cog glyphicon-cog-primary">
                                     </span>
                     </a>
@@ -76,12 +76,12 @@
             <tr>
                 <th class="hidden">ID</th>
                 <th >
-                    <a href="../widget/widget-list.html">
+                    <a href="../widget/widget-list.view.client.html">
                         Blog
                     </a>
                 </th>
                 <th class="icon">
-                    <a href="page-edit.html">
+                    <a href="page-edit.view.client.html">
                                     <span class="glyphicon glyphicon-cog glyphicon-cog-primary">
                                     </span>
                     </a>
@@ -98,15 +98,17 @@
             </div>
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" rows="6" placeholder="Page Title">
+                <input type="text"  class="form-control" id="title" placeholder="Page Title"></textarea>
             </div>
         </form>
+        <a class="btn btn-danger  btn-block"
+           href="page-list.view.client.html">Delete</a>
     </div>
 </div>
 
 <nav class="navbar navbar-dark bg-primary navbar-fixed-bottom">
     <div class="container">
-        <a class="navbar-text pull-right" href="../profile.html">
+        <a class="navbar-text pull-right" href="../user/profile.view.client.html">
             <span class="glyphicon glyphicon-user"></span>
         </a>
     </div>
