@@ -14,18 +14,16 @@
         vm.UserLogin = login;
 
         function login() {
-            UserService.findUserByCredentials(vm.user.username, vm.user.password, function(user){
-                if(user != null) {
-                    $location.url("/user/"+user._id);
-                }
-            });
+            var user = UserService.findUserByCredentials(vm.user.username, vm.user.password);
+            if(user != null) {
+                $location.url("/user/"+user._id);
+            }
         }
     }
 
     function RegisterController($location, $routeParams, UserService) {
         var vm = this;
         vm.createUser = createUser;
-        vm.updateUser = updateUser;
 
         function createUser() {
             var verify = document.getElementById('verify').value;
@@ -44,15 +42,16 @@
         }
     }
 
-    function ProfileController($location, $routeParams,UserService) {
+    function ProfileController($location, $scope, $routeParams,UserService) {
         var vm = this;
+        vm.updateUser = updateUser;
 
-        var userId = $routeParams.uid; //$routeParams["uid"]
+        var userId = $routeParams.uid;
 
         function init(){
             var currentUser = UserService.findUserById(userId);
             if(currentUser!=null){
-                vm.user = currentUser;
+                $scope.user = currentUser;
             }
             else{
                 $location.url("/login");
@@ -60,22 +59,15 @@
         }
         init();
 
-
-
         function updateUser() {
-            var user = vm.user;
-            user[_id] = $routeParams.uid;
-            UserService.updateUser($routeParams.uid, user);
-        }
-
-
-
-        function toProfile() {
-            $location.url("/user/" + $routeParams.uid);
-        }
-
-        function toWebsite() {
-            $location.url("/user/" + $routeParams.uid +"/website");
+            var updateUser = {};
+            updateUser["_id"] = userId;
+            updateUser["username"] = document.getElementById('username').value;
+            updateUser["firstName"] = document.getElementById('first-name').value;
+            updateUser["lastName"] = document.getElementById('last-name').value;
+            updateUser["email"] = document.getElementById('email').value;
+            updateUser["password"] = $scope.user.password;
+            UserService.updateUser($routeParams.uid, updateUser);
         }
     }
 })();

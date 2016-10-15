@@ -8,7 +8,7 @@
         .module("WebAppMaker")
         .factory("UserService", UserService);
 
-    function UserService() {
+    function UserService(){
         var users = [
             {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"},
             {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"},
@@ -58,13 +58,14 @@
             return null;
         }
 
-        function findUserByCredentials(username, password, callback) {
+        function findUserByCredentials(username, password) {
             for(var i=0; i<users.length; i++){
                 if(users[i].username == username && users[i].password==password){
-                    callback(users[i]);
-                    break;
+                    return users[i];
                 }
             }
+
+            return null;
         }
 
         function updateUser(userId, user) {

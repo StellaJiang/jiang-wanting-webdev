@@ -9,7 +9,7 @@
             </div>
             <div class="col-xs-6 text-right">
                 <p class="navbar-text pull-right">
-                    <a ng-click="profile.UpdateUser()" class="navbar-link">
+                    <a ng-click="profile.updateUser()" class="navbar-link">
                       <span class="glyphicon glyphicon-ok">
                       </span>
                     </a>
@@ -23,33 +23,33 @@
     <form>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" ng-model="profile.user.username"
-                   id="username" placeholder="Username" value="{{profile.user.username}}">
+            <input type="text" class="form-control" value="{{user.username}}"
+                   id="username" placeholder="Username">
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" ng-model="profile.user.email"
+            <input type="email" class="form-control" value="{{user.email}}"
                    id="email" placeholder="alice@wonderland.com">
         </div>
         <div class="form-group">
             <label for="first-name">First Name</label>
-            <input type="text" class="form-control" ng-model="profile.user.firstName"
-                   id="first-name" placeholder="Alice" value="{{profile.user.firstName}}">
+            <input type="text" class="form-control" value="{{user.firstName}}"
+                   id="first-name" placeholder="Alice">
         </div>
         <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input type="text" class="form-control" ng-model="profile.user.lastName"
-                   id="last-name" placeholder="Wonderland" value="{{profile.user.lastName}}">
+            <input type="text" class="form-control" value="{{user.lastName}}"
+                   id="last-name" placeholder="Wonderland">
         </div>
     </form>
 
-    <a class="btn btn-primary btn-block" ng-click="profile.toWebsite()">Websites</a>
+    <a class="btn btn-primary btn-block" href="#/user/{{user._id}}/website">Websites</a>
     <a class="btn btn-danger  btn-block" href="#/">Logout</a>
 </div>
 
 <nav class="navbar navbar-dark bg-primary navbar-fixed-bottom">
     <div class="container">
-        <a class="navbar-text pull-right" ng-click="profile.toProfile()">
+        <a class="navbar-text pull-right" href="#/user/{{user._id}}">
             <span class="glyphicon glyphicon-user"></span>
         </a>
     </div>

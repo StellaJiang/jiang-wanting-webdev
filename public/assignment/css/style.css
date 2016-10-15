@@ -13,9 +13,8 @@ body {
     color: #428bca;
 }
 
-.border-right {
-    border-right: 1px solid black;
-    height: 100%;
+.list-group-item{
+    border:none;
 }
 
 html

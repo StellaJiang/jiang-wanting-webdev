@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <title>Website Edit</title>
-</head>
-
-<body>
-
 <nav class="navbar navbar-dark navbar-fixed-top bg-primary">
     <div class="container-fluid row">
         <div class="col-xs-4 hidden-xs">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../views/user/profile.view.client.html">
+                <a class="navbar-brand" href="#/user/{{editWebsite.uid}}">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
                 </a>
@@ -22,7 +10,7 @@
                     Websites
                 </a>
 
-                <a class="navbar-text pull-right" href="website-new.view.client.html">
+                <a class="navbar-text pull-right" href="#/user/{{editWebsite.uid}}/website/new">
                         <span class="glyphicon glyphicon-plus">
                         </span>
                 </a>
@@ -30,7 +18,7 @@
         </div>
         <div class="col-xs-12 col-sm-8">
             <div class="navbar-header">
-                <a class="navbar-brand hidden-sm hidden-md hidden-lg" href="website-list.view.client.html">
+                <a class="navbar-brand hidden-sm hidden-md hidden-lg" href="#/user/{{editWebsite.uid}}/website">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
                 </a>
@@ -38,7 +26,7 @@
                     Edit Website
                 </a>
 
-                <a class="navbar-text pull-right" href="website-list.view.client.html">
+                <a class="navbar-text pull-right" ng-click="editWebsite.saveEdit()">
                         <span class="glyphicon glyphicon-ok">
                         </span>
                 </a>
@@ -49,77 +37,39 @@
 
 <div class="row container-fluid">
     <div class="col-xs-4 hidden-xs border-right">
-        <table id="websites" class="table table-borderless table-responsive">
-            <thead>
-                <tr class="hidden">
-                    <th class="hidden">ID</th>
-                    <th>Website Name</th>
-                    <th>Edit</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th class="hidden">ID</th>
-                    <th ><a href="../views/page/page-list.view.client.html">Address Book App</a></th>
-                    <th class="icon">
-                        <a href="website-edit.view.client.html">
-                            <span class="glyphicon glyphicon-cog glyphicon-cog-primary"></span>
-                        </a>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="hidden">ID</th>
-                    <th ><a href="../views/page/page-list.view.client.html">Blogger</a></th>
-                    <th class="icon">
-                        <a href="website-edit.view.client.html">
-                            <span class="glyphicon glyphicon-cog glyphicon-cog-primary"></span>
-                        </a>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="hidden">ID</th>
-                    <th ><a href="../views/page/page-list.view.client.html">Blogging App</a></th>
-                    <th class="icon">
-                        <a href="website-edit.view.client.html">
-                            <span class="glyphicon glyphicon-cog glyphicon-cog-primary"></span>
-                        </a>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="hidden">ID</th>
-                    <th ><a href="../views/page/page-list.view.client.html">Script Testing App</a></th>
-                    <th class="icon">
-                        <a href="website-edit.view.client.html">
-                            <span class="glyphicon glyphicon-cog glyphicon-cog-primary"></span>
-                        </a>
-                    </th>
-                </tr>
-            </tfoot>
-        </table>
+        <ul class="list-group">
+            <li ng-repeat="website in websites" class="list-group-item">
+                <a href="#/user/{{editWebsite.uid}}/website/{{website._id}}/page">
+                    {{website.name}}
+                </a>
+                <a class="pull-right" href="#/user/{{editWebsite.uid}}/website/{{website._id}}">
+                    <span class="glyphicon glyphicon-cog glyphicon-cog-primary"></span>
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="col-xs-12 col-sm-8">
         <form>
             <div class="form-group">
                 <label for="name">Website Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name">
+                <input type="text" class="form-control" id="name" placeholder="Name"
+                       value="{{websiteDetail.name}}">
             </div>
             <div class="form-group">
                 <label for="description">Website Description</label>
-                <textarea class="form-control" id="description" rows="6" placeholder="Description"></textarea>
+                <textarea class="form-control" id="description" rows="6" placeholder="Description">
+                    {{websiteDetail.description}}
+                </textarea>
             </div>
         </form>
-        <a class="btn btn-danger  btn-block"
-           href="website-list.view.client.html">Delete</a>
+        <a class="btn btn-danger  btn-block" ng-click="editWebsite.deleteWeb()">Delete</a>
     </div>
 </div>
 
 <nav class="navbar navbar-dark bg-primary navbar-fixed-bottom">
     <div class="container">
-        <a class="navbar-text pull-right" href="../views/user/profile.view.client.html">
+        <a class="navbar-text pull-right" href="#/user/{{newWebsite.uid}}">
             <span class="glyphicon glyphicon-user"></span>
         </a>
     </div>
 </nav>
-
-</body>
-</html>
