@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <title>Page New</title>
-</head>
-
-<body>
-
 <nav class="navbar navbar-dark navbar-fixed-top bg-primary">
     <div class="container-fluid row">
         <div class="col-xs-4 hidden-xs">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../website/website-list.view.client.html">
+                <a class="navbar-brand" href="#/user/{{newPage.uid}}/website">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
                 </a>
@@ -22,7 +10,7 @@
                     Page
                 </a>
 
-                <a class="navbar-text pull-right" href="page-new.view.client.html">
+                <a class="navbar-text pull-right" href="#/user/{{newPage.uid}}/website/{{newPage.wid}}/page/new">
                         <span class="glyphicon glyphicon-plus">
                         </span>
                 </a>
@@ -30,15 +18,15 @@
         </div>
         <div class="col-xs-12 col-sm-8">
             <div class="navbar-header">
-                <a class="navbar-brand hidden-sm hidden-md hidden-lg" href="page-list.view.client.html">
-                        <span class="glyphicon glyphicon-chevron-left">
-                        </span>
+                <a class="navbar-brand hidden-sm hidden-md hidden-lg"
+                   href="#/user/{{newPage.uid}}/website/{{newPage.wid}}/page">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
                 <a class="navbar-brand">
                     New Page
                 </a>
 
-                <a class="navbar-text pull-right" href="page-list.view.client.html">
+                <a class="navbar-text pull-right" ng-click="newPage.addPage()">
                         <span class="glyphicon glyphicon-ok">
                         </span>
                 </a>
@@ -49,46 +37,16 @@
 
 <div class="row container-fluid">
     <div class="col-xs-4 hidden-xs border-right">
-        <table id="pages" class="table table-borderless table-responsive">
-            <thead>
-            <tr class="hidden">
-                <th class="hidden">ID</th>
-                <th>Page Name</th>
-                <th>Edit</th>
-            </tr>
-            </thead>
-            <tfoot>
-            <tr>
-                <th class="hidden">ID</th>
-                <th >
-                    <a href="../widget/widget-list.view.client.html">
-                        Home
-                    </a>
-                </th>
-                <th class="icon">
-                    <a href="page-edit.view.client.html">
-                                    <span class="glyphicon glyphicon-cog glyphicon-cog-primary">
-                                    </span>
-                    </a>
-                </th>
-            </tr>
-
-            <tr>
-                <th class="hidden">ID</th>
-                <th >
-                    <a href="../widget/widget-list.view.client.html">
-                        Blog
-                    </a>
-                </th>
-                <th class="icon">
-                    <a href="page-edit.view.client.html">
-                                    <span class="glyphicon glyphicon-cog glyphicon-cog-primary">
-                                    </span>
-                    </a>
-                </th>
-            </tr>
-            </tfoot>
-        </table>
+        <ul class="list-group">
+            <li ng-repeat="page in pages" class="list-group-item">
+                <a href="#/user/{{newPage.uid}}/website/{{newPage.wid}}/page/{{page._id}}/widget">
+                    {{page.name}}
+                </a>
+                <a class="pull-right" href="#/user/{{newPage.uid}}/website/{{newPage.wid}}/page/{{page._id}}">
+                    <span class="glyphicon glyphicon-cog glyphicon-cog-primary"></span>
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="col-xs-12 col-sm-8">
         <form>
@@ -106,11 +64,8 @@
 
 <nav class="navbar navbar-dark bg-primary navbar-fixed-bottom">
     <div class="container">
-        <a class="navbar-text pull-right" href="../user/profile.view.client.html">
+        <a class="navbar-text pull-right" href="#/user/{{newPage.uid}}">
             <span class="glyphicon glyphicon-user"></span>
         </a>
     </div>
 </nav>
-
-</body>
-</html>

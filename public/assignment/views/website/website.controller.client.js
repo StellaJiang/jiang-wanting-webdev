@@ -34,7 +34,6 @@
         function addNewWebsite(){
             var name = document.getElementById('name').value;
             var description = document.getElementById('description').value;
-            console.log("name/" + name + "/name")
             if(name != "") {
                 var website = {};
                 website["name"] = name;
