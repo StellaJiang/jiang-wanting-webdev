@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <title>Widget List</title>
-</head>
-
-<body>
-
 <nav class="navbar navbar-dark navbar-fixed-top bg-primary">
     <div class="container-fluid row">
         <div class="col-xs-12 col-sm-12">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../views/page/page-list.view.client.html">
+                <a class="navbar-brand" href="#/user/{{widgetList.uid}}/website/{{widgetList.wid}}/page">
                         <span class="glyphicon glyphicon-chevron-left">
                         </span>
                 </a>
@@ -22,7 +10,8 @@
                     Widgets
                 </a>
 
-                <a class="navbar-text pull-right" href="widget-chooser.view.client.html">
+                <a class="navbar-text pull-right"
+                   href="#/user/{{widgetList.uid}}/website/{{widgetList.wid}}/page/{{widgetList.pid}}/widget/new">
                         <span class="glyphicon glyphicon-plus">
                         </span>
                 </a>
@@ -32,75 +21,30 @@
 </nav>
 
 <div class="row container-fluid">
-
-    <div class="container-fluid">
-        <div class="list-group">
-            <div class="relative-position">
-                <div class="container-fluid zero-right-padding">
-                    <a class="lheader">GIZMODO</a>
-                </div>
-                <div class="absolute-position list-element-menu zero-right-padding">
-                    <a href="widget-heading.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-                    <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                </div>
+    <div class="right-scroll container-fluid">
+        <div ng-switch="widget.widgetType" ng-repeat="widget in widgets" class="list-group-item">
+            <div class="absolute-position list-element-menu zero-right-padding">
+                <a href="#/user/{{widgetList.uid}}/website/{{widgetList.wid}}/page/{{widgetList.pid}}/widget/{{widget._id}}">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+                <a><span class="glyphicon glyphicon-menu-hamburger"></span></a>
             </div>
-
-            <div class="relative-position">
-                <div class="container-fluid zero-right-padding">
-                    <a class="mheader">
-                        US Senate Reaches Compromise on Emergency Zika Funding
-                    </a>
-                </div>
-                <div class="absolute-position list-element-menu zero-right-padding">
-                    <a href="widget-heading.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-                    <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                </div>
+            <div ng-switch="widget.size" ng-switch-when="HEADER">
+                <h1 ng-switch-when="1">{{widget.text}}</h1>
+                <h2 ng-switch-when="2">{{widget.text}}</h2>
+                <h3 ng-switch-when="3">{{widget.text}}</h3>
+                <h4 ng-switch-when="4">{{widget.text}}</h4>
+                <h5 ng-switch-when="5">{{widget.text}}</h5>
+                <h6 ng-switch-when="6">{{widget.text}}</h6>
             </div>
-
-            <div class="relative-position">
-                <div class="container-fluid zero-right-padding">
-                    <img class="img-responsive" src="../image/mosquito.jpg" alt="Sample Image"/>
-                </div>
-                <div class="absolute-position list-element-menu zero-right-padding">
-                    <a href="widget-image.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-                    <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                </div>
+            <div ng-switch-when="IMAGE">
+                <img class="img-responsive" ng-src="{{widgetList.checkSafeImageUrl(widget.url)}}" alt="Sample Image"/>
             </div>
-
-            <div class="relative-position">
-                <div class="container-fluid zero-right-padding">
-                    <a class="sheader">
-                        In February, the White House formally asked the Congress for $1.8 billion dollars to help combat
-                        the Zika virus this summer.Now, the Senate has worked out a bipartisan deal will allocate $1.1
-                        billion in emergency funding.
-                    </a>
-                </div>
-                <div class="absolute-position list-element-menu zero-right-padding">
-                    <a href="widget-heading.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-                    <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                </div>
+            <div ng-switch-when="YOUTUBE">
+                <iframe ng-src="{{widgetList.checkSafeYuoTubeUrl(widget.url)}}"
+                        frameborder="0" allowfullscreen></iframe>
             </div>
-
-            <div class="relative-position">
-                <div class="container-fluid zero-right-padding">
-                    <a class="mheader">
-                        Man in Wingsuit Files Sraignt Through a Ring of Fire
-                    </a>
-                </div>
-                <div class="absolute-position list-element-menu zero-right-padding">
-                    <a href="widget-heading.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-                    <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                </div>
-            </div>
-
-            <div class="relative-position">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/uLWLashCXHE"></iframe>
-                </div>
-                <div class="absolute-position list-element-menu zero-right-padding">
-                    <a href="widget-youtube.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-                    <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
-                </div>
+            <div ng-switch-when="HTML" ng-bind-html="widgetList.checkSafeHtml(widget.text)">
             </div>
         </div>
     </div>
@@ -108,11 +52,8 @@
 
 <nav class="navbar navbar-dark bg-primary navbar-fixed-bottom">
     <div class="container">
-        <a class="navbar-text pull-right" href="../views/user/profile.view.client.html">
+        <a class="navbar-text pull-right" href="#/user/{{widgetList.uid}}">
             <span class="glyphicon glyphicon-user"></span>
         </a>
     </div>
 </nav>
-
-</body>
-</html>

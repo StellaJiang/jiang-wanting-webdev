@@ -1,54 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <title>Widget Chooser</title>
-</head>
-<body>
 
-    <nav class="navbar navbar-dark navbar-fixed-top bg-primary">
-        <div class="container-fluid row">
-            <div class="col-xs-12 col-sm-12">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="widget-list.view.client.html">
-                            <span class="glyphicon glyphicon-chevron-left">
-                            </span>
-                    </a>
-                    <a class="navbar-brand">
-                        Choose Widget
-                    </a>
-                </div>
+<nav class="navbar navbar-dark navbar-fixed-top bg-primary">
+    <div class="container-fluid row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="navbar-header">
+                <a class="navbar-brand"
+                   href="#/user/{{newWidget.uid}}/website/{{newWidget.wid}}/page/{{newWidget.pid}}/widget">
+                    <span class="glyphicon glyphicon-chevron-left">
+                    </span>
+                </a>
+                <a class="navbar-brand">
+                    Choose Widget
+                </a>
             </div>
         </div>
-    </nav>
-
-    <div class="container">
-        <table id="widgets" class="table table-borderless table-responsive">
-            <tfoot>
-                <tr><th ><a href="widget-heading.view.client.html">Header</a></th></tr>
-                <tr><th ><a href="#">Label</a></th></tr>
-                <tr><th ><a href="#">HTML</a></th></tr>
-                <tr><th ><a href="#">Text Input</a></th></tr>
-                <tr><th ><a href="#">Link</a></th></tr>
-                <tr><th ><a href="#">Button</a></th></tr>
-                <tr><th ><a href="widget-image.view.client.html">Image</a></th></tr>
-                <tr><th ><a href="widget-youtube.view.client.html">Youtube</a></th></tr>
-                <tr><th ><a href="#">Data Table</a></th></tr>
-                <tr><th ><a href="#">Repeater</a></th></tr>
-            </tfoot>
-        </table>
     </div>
+</nav>
 
-    <nav class="navbar navbar-dark bg-primary navbar-fixed-bottom">
-        <div class="container">
-            <a class="navbar-text pull-right" href="../views/user/profile.view.client.html">
-                <span class="glyphicon glyphicon-user"></span>
+<div class="container">
+    <ul class="list-group">
+        <li ng-repeat="type in types" class="list-group-item">
+            <a href="#/user/{{newWidget.uid}}/website/{{newWidget.wid}}/page/{{newWidget.pid}}/widget/{{type._id}}">
+                {{type.typeName}}
             </a>
-        </div>
-    </nav>
+        </li>
+    </ul>
 
-</body>
-</html>
+<nav class="navbar navbar-dark bg-primary navbar-fixed-bottom">
+    <div class="container">
+        <a class="navbar-text pull-right" href="#/user/{{newWidget.uid}}">
+            <span class="glyphicon glyphicon-user"></span>
+        </a>
+    </div>
+</nav>

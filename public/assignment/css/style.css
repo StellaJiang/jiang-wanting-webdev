@@ -84,3 +84,12 @@ html
 .glyphicon-menu-hamburger {
     color: black;
 }
+
+.right-scroll{
+    padding-top: 15px;
+    margin-bottom: 50px;
+    top: 0px;bottom: 0px;
+    position: relative;
+    height: calc(100vh - 100px);
+    overflow: auto;
+}
