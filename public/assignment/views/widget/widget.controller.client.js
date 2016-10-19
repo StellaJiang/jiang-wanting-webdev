@@ -63,17 +63,18 @@
 
         function init(){
             $scope.widget = WidgetService.findWidgetById(vm.wgid);
+            $scope.widget.widgetType = $scope.widget.widgetType.toLowerCase();
         }
         init();
 
         function update(){
             var newWidget = {};
-            if($scope.widget.widgetType == "HEADER") {
+            if($scope.widget.widgetType == "header") {
                 newWidget["name"] = document.getElementById('name').value;
                 newWidget["text"] = document.getElementById('text').value;
                 newWidget["size"] = document.getElementById('size').value;
             }
-            else if($scope.widget.widgetType == "IMAGE") {
+            else if($scope.widget.widgetType == "image") {
                 newWidget["name"] = document.getElementById('name').value;
                 newWidget["text"] = document.getElementById('text').value;
                 newWidget["width"] = document.getElementById('width').value;
@@ -87,14 +88,14 @@
                     newWidget["url"] = "image/mosquito.jpg";
                 }
             }
-            else if($scope.widget.widgetType == "YOUTUBE") {
+            else if($scope.widget.widgetType == "youtube") {
                 newWidget["name"] = document.getElementById('name').value;
                 newWidget["text"] = document.getElementById('text').value;
                 newWidget["url"] = document.getElementById('url').value;
                 newWidget["width"] = document.getElementById('width').value;
             }
 
-            newWidget["widgetType"] = $scope.widget.widgetType;
+            newWidget["widgetType"] = $scope.widget.widgetType.toUpperCase();
             if($scope.widget.type) {
                 WidgetService.createWidget(vm.pid, newWidget);
             }
