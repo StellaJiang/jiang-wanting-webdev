@@ -50,7 +50,7 @@
 
         function init(){
             var currentUser = UserService.findUserById(userId);
-            if(currentUser!=null){
+            if(currentUser != null){
                 $scope.user = currentUser;
             }
             else{

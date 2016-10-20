@@ -38,11 +38,12 @@
                 <h6 ng-switch-when="6">{{widget.text}}</h6>
             </div>
             <div ng-switch-when="IMAGE">
-                <img class="img-responsive" ng-src="{{widgetList.checkSafeImageUrl(widget.url)}}" alt="Sample Image"/>
+                <img class="img-responsive" ng-src="{{widgetList.checkSafeImageUrl(widget.url)}}"
+                     alt="Sample Image" width="{{widget.width}}"/>
             </div>
             <div ng-switch-when="YOUTUBE">
                 <iframe ng-src="{{widgetList.checkSafeYuoTubeUrl(widget.url)}}"
-                        frameborder="0" allowfullscreen></iframe>
+                        frameborder="0" width="{{widget.width}}" allowfullscreen></iframe>
             </div>
             <div ng-switch-when="HTML" ng-bind-html="widgetList.checkSafeHtml(widget.text)">
             </div>

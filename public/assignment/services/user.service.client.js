@@ -62,10 +62,9 @@
             for(var i=0; i<users.length; i++){
                 if(users[i].username == username && users[i].password==password){
                     return users[i];
+                    break;
                 }
             }
-
-            return null;
         }
 
         function updateUser(userId, user) {
