@@ -63,11 +63,12 @@
 
         function init(){
             $scope.widget = WidgetService.findWidgetById(vm.wgid);
-            $scope.widget.widgetType = $scope.widget.widgetType.toLowerCase();
+            console.log("widgetType = " + $scope.widget.widgetType);
         }
         init();
 
         function update(){
+            $scope.widget.widgetType = $scope.widget.widgetType.toLowerCase();
             var newWidget = {};
             if($scope.widget.widgetType == "header") {
                 newWidget["name"] = document.getElementById('name').value;
