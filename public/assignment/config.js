@@ -5,7 +5,7 @@
 (function() {
     "use strict";
     angular
-        .module("WebAppMaker")
+        .module("WebAppMaker",["ngRoute"])
         .config(Config);
 
     function Config($routeProvider) {

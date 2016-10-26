@@ -14,7 +14,14 @@
         vm.uid = $routeParams.uid;
 
         function init(){
-            $scope.websites = WebsiteService.findWebsitesByUser(vm.uid);
+            WebsiteService
+                .findWebsitesByUser(vm.uid)
+                .success(function(websiteList){
+                    $scope.websites = websiteList;
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
         }
 
         init();
@@ -26,7 +33,14 @@
         vm.addNewWebsite = addNewWebsite;
 
         function init(){
-            $scope.websites = WebsiteService.findWebsitesByUser(vm.uid);
+            WebsiteService
+                .findWebsitesByUser(vm.uid)
+                .success(function(websiteList){
+                    $scope.websites = websiteList;
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
         }
 
         init();
@@ -39,8 +53,16 @@
                 website["name"] = name;
                 website["description"] = description;
                 website["developerId"] = vm.uid.toString();
-                WebsiteService.createWebsite(website);
-                $location.url("/user/" + vm.uid + "/website");
+                WebsiteService
+                    .createWebsite(vm.uid, website)
+                    .success(function(website){
+                        if(website){
+                            $location.url("/user/" + vm.uid + "/website");
+                        }
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
             }
             else {
                 $location.url("/user/" + vm.uid + "/website");
@@ -57,8 +79,22 @@
         vm.deleteWeb = deleteWeb;
 
         function init(){
-            $scope.websites = WebsiteService.findWebsitesByUser(vm.uid);
-            $scope.websiteDetail = WebsiteService.findWebsiteById(vm.wid);
+            WebsiteService
+                .findWebsitesByUser(vm.uid)
+                .success(function(websiteList){
+                    $scope.websites = websiteList;
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+            WebsiteService
+                .findWebsiteById(vm.wid)
+                .success(function(website){
+                    $scope.websiteDetail = website;
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
             vm.webDetail = $scope.websiteDetail;
         }
 
@@ -70,13 +106,31 @@
             updateWeb["description"] = document.getElementById('description').value;
             updateWeb["_id"] = vm.wid;
             updateWeb["developerId"] = vm.uid;
-            WebsiteService.updateWebsite(vm.wid, updateWeb);
-            $location.url("/user/" + vm.uid + "/website");
+            WebsiteService
+                .updateWebsite(vm.wid, updateWeb)
+                .success(function(website) {
+                    $location.url("/user/" + vm.uid + "/website");
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
         }
 
         function deleteWeb(){
-            WebsiteService.deleteWebsite(vm.wid);
-            $location.url("/user/" + vm.uid + "/website");
+            WebsiteService
+                .deleteWebsite(vm.wid)
+                .success(function(website){
+                    if(website === '1') {
+                        $location.url("/user/" + vm.uid + "/website");
+                    }
+                    else {
+                        $location.url("/user/" + vm.uid + "/website");
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+
         }
     }
 

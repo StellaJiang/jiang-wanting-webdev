@@ -14,27 +14,44 @@
         vm.UserLogin = login;
 
         function login() {
-            var user = UserService.findUserByCredentials(vm.user.username, vm.user.password);
-            if(user != null) {
-                $location.url("/user/"+user._id);
-            }
+            UserService
+                .findUserByCredentials(vm.user.username, vm.user.password)
+                .success(function(user){
+                    if(user === '0') {
+                        vm.error = "No such user";
+                    }
+                    else {
+                        $location.url("/user/"+user._id);
+                    }
+                })
+                .catch(function(user){
+                    console.log("error from login");
+                });
         }
     }
 
-    function RegisterController($location, $routeParams, UserService) {
+    function RegisterController($location, UserService) {
         var vm = this;
         vm.createUser = createUser;
 
         function createUser() {
             var verify = document.getElementById('verify').value;
-            if (vm.user.password == verify) {
-                var user = UserService.createUser(vm.user);
+            if (vm.user.password === verify) {
+                UserService
+                    .createUser(vm.user)
+                    .success(function(user){
+                        $location.url("/user/" + user._id);
+                    })
+                    .catch(function(error){
+                        $location.url("/register");
+                    });
+                /*var user = UserService.createUser(vm.user);
                 if(user != null) {
                     $location.url("/user/" + user._id);
                 }
                 else {
                     $location.url("/register");
-                }
+                }*/
             }
             else {
                 $location.url("/register");
@@ -49,13 +66,19 @@
         var userId = $routeParams.uid;
 
         function init(){
-            var currentUser = UserService.findUserById(userId);
-            if(currentUser != null){
-                $scope.user = currentUser;
-            }
-            else{
-                $location.url("/login");
-            }
+            UserService
+                .findUserById(userId)
+                .success(function(user){
+                    if(user === '0') {
+                        $location.url("/login");
+                    }
+                    else {
+                        $scope.user = user;
+                    }
+                })
+                .catch(function(error){
+                    console.log("error from profile");
+                });
         }
         init();
 
@@ -67,7 +90,16 @@
             updateUser["lastName"] = document.getElementById('last-name').value;
             updateUser["email"] = document.getElementById('email').value;
             updateUser["password"] = $scope.user.password;
-            UserService.updateUser($routeParams.uid, updateUser);
+            UserService
+                .updateUser($routeParams.uid, updateUser)
+                .success(function(user){
+                    if(user === '0') {
+                        console.log("error from profile update");
+                    }
+                })
+                .catch(function(error){
+                    console.log("error from profile update");
+                });
         }
     }
 })();
