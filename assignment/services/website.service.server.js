@@ -12,11 +12,11 @@ module.exports = function(app) {
         { "_id": "789", "name": "Chess",       "developerId": "234" }
     ];
 
-    app.post('/api/user/:uid/website', createWebsite);
-    app.get('/api/user/:uid/website', findAllWebsitesByUser);
-    app.get('/api/website/:wid', findWebsiteById);
-    app.put('/api/website/:wid', updateWebsite);
-    app.delete('/api/website/:wid', deleteWebsite);
+    app.post('/api/user/:userId/website', createWebsite);
+    app.get('/api/user/:userId/website', findAllWebsitesForUser);
+    app.get('/api/website/:websiteId', findWebsiteById);
+    app.put('/api/website/:websiteId', updateWebsite);
+    app.delete('/api/website/:websiteId', deleteWebsite);
 
     function createWebsite(req, res){
         var website = req.body;
@@ -27,8 +27,8 @@ module.exports = function(app) {
         res.send(website);
     }
 
-    function findAllWebsitesByUser(req, res){
-        var uid = parseInt(req.params.uid);
+    function findAllWebsitesForUser(req, res){
+        var uid = parseInt(req.params.userId);
         var websiteList = [];
         var idx = 0;
         for(var i = 0; i < websites.length; i++) {
@@ -40,7 +40,7 @@ module.exports = function(app) {
     }
 
     function findWebsiteById(req, res) {
-        var wid = parseInt(req.params.wid);
+        var wid = parseInt(req.params.websiteId);
         for(var i = 0; i < websites.length; i++) {
             if(parseInt(websites[i]._id) == wid) {
                 res.send(websites[i]);
@@ -52,7 +52,7 @@ module.exports = function(app) {
 
     function updateWebsite(req, res) {
         var website = req.body;
-        var wid = parseInt(req.params.wid);
+        var wid = parseInt(req.params.websiteId);
         for(var i = 0; i < websites.length; i++) {
             if(parseInt(websites[i]._id) == wid) {
                 websites[i] = website;
@@ -64,7 +64,7 @@ module.exports = function(app) {
     }
 
     function deleteWebsite(req, res) {
-        var wid = parseInt(req.params.wid);
+        var wid = parseInt(req.params.websiteId);
         for(var i = 0; i < websites.length; i++) {
             if(websites[i]._id == wid) {
                 websites.splice(i, 1);

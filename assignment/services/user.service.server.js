@@ -12,9 +12,9 @@ module.exports = function(app) {
 
     app.post('/api/user', createUser);
     app.get('/api/user', findUser);
-    app.get('/api/user/:uid', findUserById);
-    app.put('/api/user/:uid', updateUser);
-    app.delete('/api/user/:uid', deleteUser);
+    app.get('/api/user/:userId', findUserById);
+    app.put('/api/user/:userId', updateUser);
+    app.delete('/api/user/:userId', deleteUser);
 
     function findUser(req, res) {
         var params = req.params;
@@ -50,7 +50,7 @@ module.exports = function(app) {
     }
 
     function findUserById(req, res) {
-        var uid = parseInt(req.params.uid);
+        var uid = parseInt(req.params.userId);
         for(var u in users) {
             if(parseInt(users[u]._id) === uid) {
                 res.send(users[u]);
@@ -75,7 +75,7 @@ module.exports = function(app) {
     }
 
     function updateUser(req, res) {
-        var uid = parseInt(req.params.uid);
+        var uid = parseInt(req.params.userId);
         var user = req.body;
         for(var u in users){
             if(parseInt(users[u]._id) == uid){
@@ -88,7 +88,7 @@ module.exports = function(app) {
     }
 
     function deleteUser(req, res) {
-        var uid = parseInt(req.params.uid);
+        var uid = parseInt(req.params.userId);
         for(var u in users){
             if(parseInt(users[u]._id) == uid){
                 users.splice(u, 1);
