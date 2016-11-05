@@ -63,8 +63,9 @@ module.exports = function(app) {
     function createUser(req, res) {
         var user = req.body;
         for(var i = 0; i < users.length; i++) {
-            if(users[i].username == user.username) {
-                return null;
+            if(users[i].username === user.username) {
+                res.send('0');
+                return;
             }
         }
         var last_user_id = users[users.length - 1]._id + 1;
@@ -78,7 +79,7 @@ module.exports = function(app) {
         var uid = parseInt(req.params.userId);
         var user = req.body;
         for(var u in users){
-            if(parseInt(users[u]._id) == uid){
+            if(parseInt(users[u]._id) === uid){
                 users[u] = user;
                 res.send(user);
                 return;
@@ -90,7 +91,7 @@ module.exports = function(app) {
     function deleteUser(req, res) {
         var uid = parseInt(req.params.userId);
         for(var u in users){
-            if(parseInt(users[u]._id) == uid){
+            if(parseInt(users[u]._id) === uid){
                 users.splice(u, 1);
                 res.send('1');
                 return;

@@ -17,12 +17,38 @@
         vm.checkSafeHtml = checkSafeHtml;
         vm.checkSafeYuoTubeUrl = checkSafeYuoTubeUrl;
         vm.checkSafeImageUrl = checkSafeImageUrl;
+        vm.sort = sort;
 
         function init(){
-            $scope.widgets = WidgetService.findWidgetsByPageId(vm.pid);
+            WidgetService
+                .findWidgetsByPageId(vm.pid)
+                .success(function(widgetList) {
+                    $scope.widgets = widgetList;
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+
+            $(".wam-widgets").sortable({
+                axis: 'y'
+            });
         }
 
         init();
+
+        function sort(start, end) {
+            var index = {};
+            index['start'] = start;
+            index['end'] = end;
+            WidgetService
+                .sortItem(vm.pid, index)
+                .success(function(code){
+                    console.log(code);
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+        }
 
         function checkSafeHtml(html){
             return $sce.trustAsHtml(html);
@@ -47,7 +73,14 @@
         vm.pid = $routeParams.pid;
 
         function init(){
-            $scope.types = WidgetService.findTypes();
+            WidgetService
+                .findTypes()
+                .success(function(types){
+                    $scope.types = types;
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
         }
         init();
     }
@@ -62,8 +95,23 @@
         vm.deleteWidget = deleteWig;
 
         function init(){
-            $scope.widget = WidgetService.findWidgetById(vm.wgid);
-            $scope.type = $scope.widget.widgetType.toLowerCase();
+            WidgetService
+                .findWidgetById(vm.wgid)
+                .success(function(widget){
+                    $scope.widget = widget;
+                    $scope.type = $scope.widget.widgetType.toLowerCase();
+                    if($scope.type === 'image') {
+                        var tempUrl = $scope.widget.url;
+                        $scope.url = tempUrl;
+                        if(tempUrl.substring(0, 1) == '/') {
+                            var temp = tempUrl.split("/");
+                            $scope.url = temp[temp.length - 1];
+                        }
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
         }
         init();
 
@@ -78,14 +126,13 @@
                 newWidget["name"] = document.getElementById('name').value;
                 newWidget["text"] = document.getElementById('text').value;
                 newWidget["width"] = document.getElementById('width').value;
-                var url = document.getElementById('url').value;;
-                if(url != "") {
-                    newWidget["url"] = url;
-                }
+                var currUrl = document.getElementById('url').value;
 
-                var file = document.getElementById('upload').value;
-                if(file != "") {
-                    newWidget["url"] = "image/mosquito.jpg";
+                if(currUrl.split('/').length == 1) {
+                    newWidget["url"] = '/../../uploads/' + currUrl;
+                }
+                else {
+                    newWidget["url"] = currUrl;
                 }
             }
             else if($scope.widget.widgetType == "YOUTUBE") {
@@ -97,21 +144,45 @@
 
             newWidget["widgetType"] = $scope.widget.widgetType;
             if($scope.widget.type) {
-                WidgetService.createWidget(vm.pid, newWidget);
+                WidgetService
+                    .createWidget(vm.pid, newWidget)
+                    .success(function(widget) {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    });
             }
             else {
                 newWidget["_id"] = vm.wgid;
                 newWidget["pageId"] = vm.pid;
-                WidgetService.updateWidget(vm.wgid, newWidget);
+                WidgetService
+                    .updateWidget(vm.wgid, newWidget)
+                    .success(function(widget) {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    });
             }
-            $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+
         }
 
         function deleteWig(){
             if(!$scope.widget.type) {
-                WidgetService.deleteWidget(vm.wgid);
+                WidgetService
+                    .deleteWidget(vm.wgid)
+                    .success(function(code) {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    });
             }
-            $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+            else {
+                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+            }
         }
+
     }
 })();

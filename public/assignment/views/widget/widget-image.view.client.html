@@ -32,17 +32,25 @@
         <div class="form-group">
             <label for="url">URL</label>
             <input type="text"  class="form-control" id="url" placeholder="https://i.kinja-img.com/gawker-media/image"
-                   value="{{widget.url}}">
+                   value="{{url}}">
         </div>
         <div class="form-group">
             <label for="width">Width</label>
             <input type="text"  class="form-control" id="width" placeholder="100%" value="{{widget.width}}">
         </div>
-        <div class="form-group">
-            <label for="upload">Upload</label>
-            <input type="file"  class="form-control" id="upload" placeholder="No file chosen">
-        </div>
     </form>
+
+    <form action="/api/upload"  method="post" enctype="multipart/form-data" target="_parent">
+        <label for="upload">Upload</label>
+        <input  name="myFile"   type="file" id="upload" class="form-control" placeholder="No file chosen"/>
+        <input  name="width"    value="{{widget.width}}" style="display: none"/>
+        <input  name="widgetId" value="{{widget._id}}"   style="display: none"/>
+        <input  name="uid"    value="{{editWidget.uid}}" style="display: none"/>
+        <input  name="wid" value="{{editWidget.wid}}"   style="display: none"/>
+        <input  name="pid" value="{{editWidget.pid}}"   style="display: none"/>
+        <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
+    </form>
+    <br>
     <a class="btn btn-danger  btn-block" ng-click="editWidget.deleteWidget()">Delete</a>
 </div>
 

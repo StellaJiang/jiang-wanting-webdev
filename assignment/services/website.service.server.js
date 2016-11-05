@@ -32,7 +32,7 @@ module.exports = function(app) {
         var websiteList = [];
         var idx = 0;
         for(var i = 0; i < websites.length; i++) {
-            if(parseInt(websites[i].developerId) == uid) {
+            if(parseInt(websites[i].developerId) === uid) {
                 websiteList[idx++] = websites[i];
             }
         }
@@ -42,7 +42,7 @@ module.exports = function(app) {
     function findWebsiteById(req, res) {
         var wid = parseInt(req.params.websiteId);
         for(var i = 0; i < websites.length; i++) {
-            if(parseInt(websites[i]._id) == wid) {
+            if(parseInt(websites[i]._id) === wid) {
                 res.send(websites[i]);
                 return;
             }
@@ -54,7 +54,7 @@ module.exports = function(app) {
         var website = req.body;
         var wid = parseInt(req.params.websiteId);
         for(var i = 0; i < websites.length; i++) {
-            if(parseInt(websites[i]._id) == wid) {
+            if(parseInt(websites[i]._id) === wid) {
                 websites[i] = website;
                 res.send(website);
                 return;
@@ -66,7 +66,7 @@ module.exports = function(app) {
     function deleteWebsite(req, res) {
         var wid = parseInt(req.params.websiteId);
         for(var i = 0; i < websites.length; i++) {
-            if(websites[i]._id == wid) {
+            if(parseInt(websites[i]._id) === wid) {
                 websites.splice(i, 1);
                 res.send('1');
                 return;

@@ -32,7 +32,7 @@ module.exports = function(app) {
         var pageList = [];
         var idx = 0;
         for(var i = 0; i < pages.length; i++) {
-            if(pages[i].websiteId == wid) {
+            if(parseInt(pages[i].websiteId) === wid) {
                 pageList[idx++] = pages[i];
             }
         }
@@ -42,7 +42,7 @@ module.exports = function(app) {
     function findPageById(req, res){
         var pageId = parseInt(req.params.pageId);
         for(var i = 0; i < pages.length; i++) {
-            if(pages[i]._id == pageId) {
+            if(parseInt(pages[i]._id) === pageId) {
                 res.send(pages[i]);
                 return;
             }
@@ -54,7 +54,7 @@ module.exports = function(app) {
         var page = req.body;
         var pageId = parseInt(req.params.pageId);
         for(var i = 0; i < pages.length; i++) {
-            if(pages[i]._id == pageId) {
+            if(parseInt(pages[i]._id) === pageId) {
                 pages[i] = page;
                 res.send(page);
                 return;
@@ -66,7 +66,7 @@ module.exports = function(app) {
     function deletePage(req, res) {
         var pageId = parseInt(req.params.pageId);
         for(var i = 0; i < pages.length; i++) {
-            if(pages[i]._id == pageId) {
+            if(parseInt(pages[i]._id) === pageId) {
                 pages.splice(i, 1);
                 res.send('1');
                 return;
