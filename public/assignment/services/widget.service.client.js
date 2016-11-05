@@ -43,7 +43,7 @@
 
         function deleteWidget(widgetId){
             var url = '/api/widget/' + widgetId;
-            return $http.delete(url, widget);
+            return $http.delete(url);
         }
 
         function findTypes(){
