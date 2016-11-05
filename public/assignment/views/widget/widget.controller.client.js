@@ -103,7 +103,7 @@
                     if($scope.type === 'image') {
                         var tempUrl = $scope.widget.url;
                         $scope.url = tempUrl;
-                        if(tempUrl.substring(0, 1) == '/') {
+                        if(!$scope.widget.type && tempUrl.substring(0, 1) == '/') {
                             var temp = tempUrl.split("/");
                             $scope.url = temp[temp.length - 1];
                         }
