@@ -43,14 +43,16 @@ module.exports = function(app) {
     app.get('/api/types', findAllTypes);
     app.put('/api/widget/:widgetId', updateWidget);
     app.delete('/api/widget/:widgetId', deleteWidget);
+    app.get('/api/tempImage/:uid', findTempImage);
     app.put('/page/:pageId/widget', sortItem);
+    app.delete('/api/deleteTempImage/:uid', deleteTempImage);
 
 
     function createWidget(req, res){
         var widget = req.body;
         var pageId = req.params.pageId;
         pageId.toString();
-        var last_widget_id = widgets[widgets.length - 1]._id + 1;
+        var last_widget_id = parseInt(widgets[widgets.length - 1]._id) + 1;
         last_widget_id.toString();
         widget["_id"] = last_widget_id;
         widget["pageId"] = pageId;
@@ -118,30 +120,63 @@ module.exports = function(app) {
     }
 
     function uploadImage(req, res) {
-        var widgetId      = req.body.widgetId;
-        var width         = req.body.width;
-        var myFile        = req.file;
+        var widgetId = req.body.widgetId;
+        var width = req.body.width;
+        var myFile = req.file;
 
-        var originalname  = myFile.originalname; // file name on user's computer
-        var filename      = myFile.filename;     // new file name in upload folder
-        var path          = myFile.path;         // full path of uploaded file
-        var destination   = myFile.destination;  // folder where file is saved to
-        var size          = myFile.size;
-        var mimetype      = myFile.mimetype;
+        var originalname = myFile.originalname; // file name on user's computer
+        var filename = myFile.filename;     // new file name in upload folder
+        var path = myFile.path;         // full path of uploaded file
+        var destination = myFile.destination;  // folder where file is saved to
+        var size = myFile.size;
+        var mimetype = myFile.mimetype;
 
         var uid = req.body.uid;
         var wid = req.body.wid;
         var pid = req.body.pid;
-        var url = "/assignment/index.html#/user/"+uid+"/website/"+wid+"/page/"+pid+"/widget/"+widgetId;
-
-        for(var i = 0; i < widgets.length; i++) {
-            if(parseInt(widgets[i]._id) === parseInt(widgetId)) {
+        var url = "/assignment/index.html#/user/" + uid + "/website/" + wid + "/page/" + pid + "/widget/" + widgetId;
+        var find = false;
+        for (var i = 0; i < widgets.length; i++) {
+            if (parseInt(widgets[i].uid) === parseInt(uid)) {
                 widgets[i].url = '/../../uploads/' + myFile.filename;
-                res.redirect(url);
+                find = true;
+                break;
+            }
+        }
+
+        if (!find) {
+            var temp = {};
+            var last_widget_id = parseInt(widgets[widgets.length - 1]._id) + 1;
+            last_widget_id.toString();
+            temp["_id"] = last_widget_id;
+            temp["uid"] = uid;
+            temp["url"] = '/../../uploads/' + myFile.filename;
+            widgets.push(temp);
+        }
+        res.redirect(url);
+    }
+
+    function findTempImage(req, res) {
+        var uid = parseInt(req.params.uid);
+        for(var i = 0; i < widgets.length; i++) {
+            if(parseInt(widgets[i].uid) === uid) {
+                res.send(widgets[i]);
                 return;
             }
         }
-        res.redirect("");
+        res.send("0");
+    }
+
+    function deleteTempImage(req, res){
+        var uid = parseInt(req.params.uid);
+        for(var i = 0; i < widgets.length; i++) {
+            if(parseInt(widgets[i].uid) === uid) {
+                widgets.splice(i, 1);
+                res.send('1');
+                return;
+            }
+        }
+        res.send('0');
     }
 
     function sortItem(req, res) {

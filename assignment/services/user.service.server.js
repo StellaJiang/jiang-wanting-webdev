@@ -68,7 +68,7 @@ module.exports = function(app) {
                 return;
             }
         }
-        var last_user_id = users[users.length - 1]._id + 1;
+        var last_user_id = parseInt(users[users.length - 1]._id) + 1;
         last_user_id.toString();
         user["_id"] = last_user_id;
         users.push(user);

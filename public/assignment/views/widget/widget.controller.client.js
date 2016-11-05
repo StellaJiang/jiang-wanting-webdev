@@ -42,9 +42,7 @@
             index['end'] = end;
             WidgetService
                 .sortItem(vm.pid, index)
-                .success(function(code){
-                    console.log(code);
-                })
+                .success(function(code){})
                 .catch(function(error){
                     console.log(error);
                 });
@@ -93,6 +91,7 @@
         vm.wgid = $routeParams.wgid;
         vm.updateWidget = update;
         vm.deleteWidget = deleteWig;
+        vm.goBack = goBack;
 
         function init(){
             WidgetService
@@ -107,11 +106,26 @@
                             var temp = tempUrl.split("/");
                             $scope.url = temp[temp.length - 1];
                         }
+                        WidgetService
+                            .findTempImage(vm.uid)
+                            .success(function (widget) {
+                                if (widget != "0") {
+                                    if(widget["url"].substring(0, 1) == '/') {
+                                        var temp = widget["url"].split("/");
+                                        $scope.url = temp[temp.length - 1];
+                                    }
+                                }
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
                     }
                 })
                 .catch(function(error) {
                     console.log(error);
                 });
+
+
         }
         init();
 
@@ -147,11 +161,18 @@
                 WidgetService
                     .createWidget(vm.pid, newWidget)
                     .success(function(widget) {
+                        WidgetService
+                            .deleteTempImage(vm.uid)
+                            .success(function(code){})
+                            .catch(function(error){
+                                console.log(error);
+                            });
                         $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
                     })
                     .catch(function(error){
                         console.log(error);
                     });
+
             }
             else {
                 newWidget["_id"] = vm.wgid;
@@ -159,6 +180,12 @@
                 WidgetService
                     .updateWidget(vm.wgid, newWidget)
                     .success(function(widget) {
+                        WidgetService
+                            .deleteTempImage(vm.uid)
+                            .success(function(code){})
+                            .catch(function(error){
+                                console.log(error);
+                            });
                         $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
                     })
                     .catch(function(error){
@@ -182,6 +209,18 @@
             else {
                 $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
             }
+        }
+
+        function goBack(){
+            WidgetService
+                .deleteTempImage(vm.uid)
+                .success(function(code) {
+                    $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+
         }
 
     }

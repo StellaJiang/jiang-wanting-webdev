@@ -16,6 +16,8 @@
             updateWidget : updateWidget,
             deleteWidget : deleteWidget,
             findTypes: findTypes,
+            findTempImage: findTempImage,
+            deleteTempImage: deleteTempImage,
             sortItem: sortItem
         };
 
@@ -48,6 +50,14 @@
 
         function findTypes(){
             return $http.get('/api/types');
+        }
+
+        function findTempImage(uid){
+            return $http.get('/api/tempImage/' + uid);
+        }
+
+        function deleteTempImage(uid){
+            return $http.delete('/api/deleteTempImage/' + uid);
         }
 
         function sortItem(pageId, index){

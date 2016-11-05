@@ -20,7 +20,7 @@ module.exports = function(app) {
 
     function createWebsite(req, res){
         var website = req.body;
-        var website_id = websites[websites.length - 1]._id + 1;
+        var website_id = parseInt(websites[websites.length - 1]._id) + 1;
         website_id.toString();
         website["_id"] = website_id;
         websites.push(website);

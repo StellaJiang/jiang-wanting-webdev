@@ -19,7 +19,7 @@ module.exports = function(app) {
         var page = req.body;
         var wid = req.params.websiteId;
         wid.toString();
-        var last_page_id = pages[pages.length - 1]._id + 1;
+        var last_page_id = parseInt(pages[pages.length - 1]._id) + 1;
         last_page_id.toString();
         page["_id"] = last_page_id;
         page["websiteId"] = wid;
