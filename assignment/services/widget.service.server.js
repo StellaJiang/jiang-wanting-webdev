@@ -126,24 +126,23 @@ module.exports = function(app, model) {
                             .updatePriorityWhenDel(widget._page, widget.priority)
                             .then(
                                 function(){
+                                    model
+                                        .widgetModel
+                                        .deleteWidget(widgetId)
+                                        .then(
+                                            function(status){
+                                                res.sendStatus(200);
+                                            },
+                                            function(error){
+                                                res.sendStatus(400).send(error);
+                                            }
+                                        );
                                 },
                                 function(error){
                                     res.sendStatus(400).send(error);
                                 }
                             );
                     }
-                },
-                function(error){
-                    res.sendStatus(400).send(error);
-                }
-            );
-
-        model
-            .widgetModel
-            .deleteWidget(widgetId)
-            .then(
-                function(status){
-                    res.sendStatus(200);
                 },
                 function(error){
                     res.sendStatus(400).send(error);
