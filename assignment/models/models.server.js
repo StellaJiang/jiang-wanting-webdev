@@ -7,8 +7,8 @@ module.exports = function(){
     var mongoose = require("mongoose");
     var uri = "mongodb://stella:Jwt!19880906@ds033116.mlab.com:33116/stellajiang";
     mongoose.connect(uri);
-    var connectionString = 'mongodb://127.0.0.1:27017/webdev';
-    mongoose.connect(connectionString);
+    //var connectionString = 'mongodb://127.0.0.1:27017/webdev';
+    //mongoose.connect(connectionString);
 
     var types = [
         { "widgetType": "HEADER", "typeName": "Header", "isType": true},
