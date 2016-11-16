@@ -3,28 +3,6 @@
  */
 
 module.exports = function(app, model) {
-    /*var widgets = [
-        { "_id": "0", "widgetType": "HEADER", "typeName": "Header", "type": true},
-        { "_id": "1", "widgetType": "LABEL", "typeName": "Label", "type": true},
-        { "_id": "2", "widgetType": "HTML", "typeName": "HTML", "type": true},
-        { "_id": "3", "widgetType": "TEXT-INPUT", "typeName": "Text Input", "type": true},
-        { "_id": "4", "widgetType": "LINK", "typeName": "Link", "type": true},
-        { "_id": "5", "widgetType": "BUTTON", "typeName": "Button", "type": true},
-        { "_id": "6", "widgetType": "IMAGE", "typeName": "Image", "type": true},
-        { "_id": "7", "widgetType": "YOUTUBE", "typeName": "Youtube", "type": true},
-        { "_id": "8", "widgetType": "DATA-TABLE", "typeName": "Data Table", "type": true},
-        { "_id": "9", "widgetType": "REPEATER", "typeName": "Repeater", "type": true},
-        { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
-        { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-        { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-            "url": "http://lorempixel.com/400/200/"},
-        { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
-        { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-        { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-            "url": "https://youtu.be/AM2Ivdi9c4E" },
-        { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
-    ];*/
-
     var multer = require('multer');
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
@@ -46,6 +24,7 @@ module.exports = function(app, model) {
     app.get('/api/tempImage/:uid', findTempImage);
     app.put('/page/:pageId/widget', sortItem);
     app.delete('/api/deleteTempImage/:uid', deleteTempImage);
+    app.put('/api/:uid/flickr', selectFlickr);
 
 
     function createWidget(req, res){
@@ -266,6 +245,22 @@ module.exports = function(app, model) {
         model
             .widgetModel
             .sortWidget(pageId, start, end)
+            .then(
+                function(status){
+                    res.sendStatus(200);
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
+    }
+
+    function selectFlickr(req, res){
+        var uid = req.params.uid;
+        var content = req.body;
+        model
+            .widgetModel
+            .selectFlicker(uid, content.photo)
             .then(
                 function(status){
                     res.sendStatus(200);

@@ -19,7 +19,8 @@ module.exports = function(){
         deleteTempImage: deleteTempImage,
         addType: addType,
         sortWidget: sortWidget,
-        updatePriorityWhenDel: updatePriorityWhenDel
+        updatePriorityWhenDel: updatePriorityWhenDel,
+        selectFlicker: selectFlicker
     };
     return api;
 
@@ -169,6 +170,28 @@ module.exports = function(){
         }
     }
 
+    function selectFlicker(uid, photo){
+        var tempImage = widgetModel
+            .find({
+                _user: uid
+            });
+        if(tempImage.length > 0) {
+            return widgetModel
+                .update(
+                    {
+                        _id: tempImage._id
+                    },
+                    {
+                        url: photo
+                    }
+                );
+        } else {
+            var temp = {};
+            temp["_user"] = uid;
+            temp["url"] = photo
+            return widgetModel.create(temp);
+        }
+    }
     function findTempImage(uid){
         return widgetModel
             .find({

@@ -37,7 +37,6 @@
         init();
 
         function sort(start, end) {
-            console.log("start = " + start + ", end = " + end);
             WidgetService
                 .sortItem(vm.pid, start, end)
                 .success(function(code){})
@@ -111,6 +110,9 @@
                                     if(image.url.substring(0, 1) == '/') {
                                         var temp = image.url.split("/");
                                         $scope.url = temp[temp.length - 1];
+                                    }
+                                    else{
+                                        $scope.url = image.url;
                                     }
                                 }
                             })
@@ -226,7 +228,6 @@
                 .catch(function(error){
                     console.log(error);
                 });
-
         }
 
     }

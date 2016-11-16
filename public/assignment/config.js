@@ -79,6 +79,11 @@
                 templateUrl: 'views/widget/widget-edit.view.client.html',
                 controller: 'EditWidgetController',
                 controllerAs: 'editWidget'
+            })
+            .when('/user/:uid/website/:wid/page/:pid/widget/:wgid/flicker', {
+                templateUrl: 'views/widget/widget-flickr-search.view.client.html',
+                controller:'FlickrController',
+                controllerAs:'flicker'
             });
     }
 })();

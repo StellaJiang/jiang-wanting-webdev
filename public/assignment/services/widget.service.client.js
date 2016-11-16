@@ -18,7 +18,8 @@
             findTypes: findTypes,
             findTempImage: findTempImage,
             deleteTempImage: deleteTempImage,
-            sortItem: sortItem
+            sortItem: sortItem,
+            selectFlickr: selectFlickr
         };
 
         return service;
@@ -63,6 +64,12 @@
         function sortItem(pageId, start, end){
             var url = '/page/'+pageId+'/widget?start=' + start + '&end=' + end;
             return $http.put(url);
+        }
+
+        function selectFlickr(uid, photo){
+            var url = '/api/'+uid+'/flickr';
+            var content = {photo: photo};
+            return $http.put(url, content);
         }
     }
 })();
