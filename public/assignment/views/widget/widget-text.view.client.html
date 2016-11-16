@@ -1,0 +1,50 @@
+<nav class="navbar navbar-dark navbar-fixed-top bg-primary">
+    <div class="container-fluid row">
+        <div class="col-xs-12 col-sm-12">
+            <div class="navbar-header">
+                <a class="navbar-brand"
+                   href="#/user/{{editWidget.uid}}/website/{{editWidget.wid}}/page/{{editWidget.pid}}/widget">
+                    <span class="glyphicon glyphicon-chevron-left">
+                    </span>
+                </a>
+                <a class="navbar-brand">
+                    Edit Widget
+                </a>
+                <a class="navbar-text pull-right" ng-click="editWidget.updateWidget()">
+                    <span class="glyphicon glyphicon-ok">
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <form>
+        <div class="form-group">
+            <label for="text">Text</label>
+            <input type="text" class="form-control" id="text" placeholder="Text" value="{{widget.text}}">
+        </div>
+        <div class="form-group">
+            <label for="row">Rows</label>
+            <input type="text"  class="form-control" id="row" placeholder="3" value="{{widget.rows}}">
+        </div>
+        <div class="form-group">
+            <label for="placeholder">Placeholder</label>
+            <input type="text"  class="form-control" id="placeholder" placeholder="example" value="{{widget.placeholder}}">
+        </div>
+        <div class="form-group">
+            <label for="formatted">Formatted</label>
+            <input ng-model="widget.formatted" type="checkbox"  class="form-control" id="formatted">
+        </div>
+    </form>
+    <a class="btn btn-danger  btn-block" ng-click="editWidget.deleteWidget()">Delete</a>
+</div>
+
+<nav class="navbar navbar-dark bg-primary navbar-fixed-bottom">
+    <div class="container">
+        <a class="navbar-text pull-right" href="#/user/{{editWidget.uid}}">
+            <span class="glyphicon glyphicon-user"></span>
+        </a>
+    </div>
+</nav>

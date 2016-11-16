@@ -4,5 +4,5 @@
 
 (function(){
     angular
-        .module("WebAppMaker",["ngRoute", "wamDirectives"]);
+        .module("WebAppMaker",["ngRoute", "textAngular", "wamDirectives"]);
 })();

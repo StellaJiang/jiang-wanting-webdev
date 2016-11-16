@@ -2,12 +2,12 @@
  * Created by Wanting on 10/25/16.
  */
 
-module.exports = function(app) {
-    var pages = [
+module.exports = function(app, model) {
+    /*var pages = [
         { "_id": "321", "name": "Post 1", "websiteId": "456" },
         { "_id": "432", "name": "Post 2", "websiteId": "456" },
         { "_id": "543", "name": "Post 3", "websiteId": "456" }
-    ];
+    ];*/
 
     app.post('/api/website/:websiteId/page', createPage);
     app.get('/api/website/:websiteId/page', findAllPagesForWebsite);
@@ -18,60 +18,88 @@ module.exports = function(app) {
     function createPage(req, res){
         var page = req.body;
         var wid = req.params.websiteId;
-        wid.toString();
-        var last_page_id = parseInt(pages[pages.length - 1]._id) + 1;
-        last_page_id.toString();
-        page["_id"] = last_page_id;
-        page["websiteId"] = wid;
-        pages.push(page);
-        res.send(page);
+        model
+            .pageModel
+            .createPage(wid, page)
+            .then(
+                function(newPage){
+                    res.send(newPage);
+
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
     function findAllPagesForWebsite(req, res){
-        var wid = parseInt(req.params.websiteId);
-        var pageList = [];
-        var idx = 0;
-        for(var i = 0; i < pages.length; i++) {
-            if(parseInt(pages[i].websiteId) === wid) {
-                pageList[idx++] = pages[i];
-            }
-        }
-        res.send(pageList);
+        var wid = req.params.websiteId;
+        model
+            .pageModel
+            .findAllPagesForWebsite(wid)
+            .then(
+                function(pages){
+                    if(pages){
+                        res.json(pages);
+                    }
+                    else{
+                        res.send('0');
+                    }
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
     function findPageById(req, res){
-        var pageId = parseInt(req.params.pageId);
-        for(var i = 0; i < pages.length; i++) {
-            if(parseInt(pages[i]._id) === pageId) {
-                res.send(pages[i]);
-                return;
-            }
-        }
-        return '0';
+        var pageId = req.params.pageId;
+        model
+            .pageModel
+            .findPageById(pageId)
+            .then(
+                function(page){
+                    if(page){
+                        res.send(page);
+                    }
+                    else{
+                        res.send('0');
+                    }
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
     function updatePage(req, res) {
         var page = req.body;
-        var pageId = parseInt(req.params.pageId);
-        for(var i = 0; i < pages.length; i++) {
-            if(parseInt(pages[i]._id) === pageId) {
-                pages[i] = page;
-                res.send(page);
-                return;
-            }
-        }
-        res.send('0');
+        var pageId = req.params.pageId;
+        model
+            .pageModel
+            .updatePage(pageId, page)
+            .then(
+                function(status){
+                    res.sendStatus(200);
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
     function deletePage(req, res) {
-        var pageId = parseInt(req.params.pageId);
-        for(var i = 0; i < pages.length; i++) {
-            if(parseInt(pages[i]._id) === pageId) {
-                pages.splice(i, 1);
-                res.send('1');
-                return;
-            }
-        }
-        res.send('0');
+        var pageId = req.params.pageId;
+        model
+            .pageModel
+            .deletePage(pageId)
+            .then(
+                function(status){
+                    res.sendStatus(200);
+                },
+                function(error){
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 };

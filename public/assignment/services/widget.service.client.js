@@ -60,9 +60,9 @@
             return $http.delete('/api/deleteTempImage/' + uid);
         }
 
-        function sortItem(pageId, index){
-            var url = '/page/'+pageId+'/widget';
-            return $http.put(url, index);
+        function sortItem(pageId, start, end){
+            var url = '/page/'+pageId+'/widget?start=' + start + '&end=' + end;
+            return $http.put(url);
         }
     }
 })();

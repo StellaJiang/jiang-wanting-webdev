@@ -52,7 +52,6 @@
                 var website = {};
                 website["name"] = name;
                 website["description"] = description;
-                website["developerId"] = vm.uid.toString();
                 WebsiteService
                     .createWebsite(vm.uid, website)
                     .success(function(website){
