@@ -62,6 +62,7 @@
     function ProfileController($location, $scope, $routeParams,UserService) {
         var vm = this;
         vm.updateUser = updateUser;
+        vm.unRegister = unRegister;
 
         var userId = $routeParams.uid;
 
@@ -96,6 +97,17 @@
                     if(user === '0') {
                         console.log("error from profile update");
                     }
+                })
+                .catch(function(error){
+                    console.log("error from profile update");
+                });
+        }
+
+        function unRegister(){
+            UserService
+                .deleteUser(userId)
+                .success(function(status){
+                    $location.url("/login");
                 })
                 .catch(function(error){
                     console.log("error from profile update");
