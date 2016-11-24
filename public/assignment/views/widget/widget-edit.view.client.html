@@ -20,8 +20,8 @@
     </div>
 </nav>
 
-<div class="container-fluid">
-    <form>
+<div class="container-fluid" ng-controller="ValidationController as model">
+    <form name="myForm" id="myForm" novalidate>
         <div ng-if='type'>
             <div ng-include="'views/widget/widget-'+type+'.view.client.html'"></div>
         </div>

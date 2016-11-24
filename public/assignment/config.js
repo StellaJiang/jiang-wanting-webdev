@@ -30,10 +30,21 @@
                 controller:'RegisterController',
                 controllerAs:'register'
             })
+            .when('/profile', {
+                templateUrl: 'views/user/profile.view.client.html',
+                controller: 'ProfileController',
+                controllerAs: 'profile',
+                resolve: {
+                    checkLogin: checkLogin
+                }
+            })
             .when('/user/:uid', {
                 templateUrl: 'views/user/profile.view.client.html',
                 controller: 'ProfileController',
-                controllerAs: 'profile'
+                controllerAs: 'profile',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
             .when('/user/:uid/website', {
                 templateUrl: 'views/website/website-list.view.client.html',
@@ -85,6 +96,25 @@
                 controller:'FlickrController',
                 controllerAs:'flicker'
             });
+
+        function checkLogin($q, UserService, $location, $rootScope){
+            var deferred = $q.defer();
+            UserService
+                .checkLogin()
+                .success(
+                    function(user){
+                        if(user != '0'){
+                            $rootScope.currentUser = user;
+                            deferred.resolve();
+                        } else {
+                            $rootScope.currentUser = null;
+                            deferred.reject();
+                            $location.url('/login');
+                        }
+                    }
+                );
+            return deferred.promise;
+        }
     }
 })();
 

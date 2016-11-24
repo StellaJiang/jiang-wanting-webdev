@@ -1,8 +1,26 @@
-<div class="container">
-    <h1>Register</h1>
-    <input type="text" ng-model="register.user.username" class="form-control" placeholder="username"/>
-    <input type="password" ng-model="register.user.password" class="form-control" placeholder="password"/>
-    <input type="password" class="form-control" id="verify" placeholder="very password"/>
-    <a class="btn btn-primary btn-block" ng-click="register.createUser()">Register</a>
-    <a class="btn btn-danger  btn-block" href="#/">Cancel</a>
+<div class="container" ng-controller="ValidationController as model">
+    <form name="myForm" id="myForm" novalidate>
+        <h1>Register</h1>
+        <input name="username" type="text" ng-model="register.user.username"
+               required class="form-control" placeholder="username"/>
+        <span ng-show="myForm.username.$invalid">
+            Please enter a username!
+        </span>
+        <input name="password" type="password" ng-model="register.user.password"
+               required class="form-control" placeholder="password"/>
+        <span ng-show="myForm.password.$invalid">
+            Please enter a password!
+        </span>
+        <input name="verify" type="password" class="form-control" required ng-model="user.password_verify"
+               placeholder="verify password" password-verify="register.user.password" />
+        <span ng-show="myForm.verify.$error.required">
+            Please verify the password!
+        </span>
+        <span id="check" ng-show="myForm.verify.$error.passwordVerify">
+            Passwords do not match!
+        </span>
+        <button class="btn btn-primary btn-block" ng-disabled="!myForm.$valid"
+           ng-click="register.createUser()">Register</button>
+        <a class="btn btn-danger  btn-block" href="#/">Cancel</a>
+    </form>
 </div>

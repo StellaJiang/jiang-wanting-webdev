@@ -56,20 +56,21 @@
         init();
 
         function addPage(){
-            var name = document.getElementById('name').value;
-            var title = document.getElementById('title').value;
-            var page = {};
-            page["name"] = name;
-            page["title"] = title;
-            PageService
-                .createPage(vm.wid, page)
-                .success(function(page) {
-                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
-                })
-                .catch(function(error){
-                    console.log(error);
-                });
-
+            if(document.getElementById("myForm").checkValidity()) {
+                var name = document.getElementById('name').value;
+                var title = document.getElementById('title').value;
+                var page = {};
+                page["name"] = name;
+                page["title"] = title;
+                PageService
+                    .createPage(vm.wid, page)
+                    .success(function (page) {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         }
     }
 
@@ -110,22 +111,23 @@
         init();
 
         function updatePage(){
-            var name = document.getElementById('name').value;
-            var title = document.getElementById('title').value;
-            var page = {};
-            page["_id"] = vm.pid;
-            page["name"] = name;
-            page["title"] = title;
-            page["websiteId"] = vm.wid;
-            PageService
-                .updatePage(vm.pid, page)
-                .success(function(page) {
-                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-
+            if(document.getElementById("myForm").checkValidity()) {
+                var name = document.getElementById('name').value;
+                var title = document.getElementById('title').value;
+                var page = {};
+                page["_id"] = vm.pid;
+                page["name"] = name;
+                page["title"] = title;
+                page["websiteId"] = vm.wid;
+                PageService
+                    .updatePage(vm.pid, page)
+                    .success(function (page) {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         }
 
         function deletePage(){

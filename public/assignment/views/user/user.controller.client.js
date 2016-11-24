@@ -14,19 +14,21 @@
         vm.UserLogin = login;
 
         function login() {
-            UserService
-                .findUserByCredentials(vm.user.username, vm.user.password)
-                .success(function(user){
-                    if(user === '0') {
-                        vm.error = "No such user";
-                    }
-                    else {
-                        $location.url("/user/"+user._id);
-                    }
-                })
-                .catch(function(user){
-                    console.log("error from login");
-                });
+            if(document.getElementById("myForm").checkValidity()) {
+                UserService
+                    .login(vm.user)
+                    .success(function (user) {
+                        if (user === '0') {
+                            vm.error = "No such user";
+                        }
+                        else {
+                            $location.url("/user/" + user._id);
+                        }
+                    })
+                    .catch(function (user) {
+                        console.log("error from login");
+                    });
+            }
         }
     }
 
@@ -35,36 +37,27 @@
         vm.createUser = createUser;
 
         function createUser() {
-            var verify = document.getElementById('verify').value;
-            if (vm.user.password === verify) {
+            console.log(document.getElementById("myForm").checkValidity());
+            if(document.getElementById("myForm").checkValidity()) {
                 UserService
-                    .createUser(vm.user)
-                    .success(function(user){
+                    .register(vm.user)
+                    .success(function (user) {
                         $location.url("/user/" + user._id);
                     })
-                    .catch(function(error){
+                    .catch(function (error) {
                         $location.url("/register");
                     });
-                /*var user = UserService.createUser(vm.user);
-                if(user != null) {
-                    $location.url("/user/" + user._id);
-                }
-                else {
-                    $location.url("/register");
-                }*/
-            }
-            else {
-                $location.url("/register");
             }
         }
     }
 
-    function ProfileController($location, $scope, $routeParams,UserService) {
+    function ProfileController($location, $scope, $routeParams, UserService, $rootScope) {
         var vm = this;
         vm.updateUser = updateUser;
-        vm.unRegister = unRegister;
+        vm.unregisterUser = unregisterUser;
+        vm.logout = logout;
 
-        var userId = $routeParams.uid;
+        var userId = $rootScope.currentUser._id;
 
         function init(){
             UserService
@@ -84,28 +77,41 @@
         init();
 
         function updateUser() {
-            var updateUser = {};
-            updateUser["_id"] = userId;
-            updateUser["username"] = document.getElementById('username').value;
-            updateUser["firstName"] = document.getElementById('first-name').value;
-            updateUser["lastName"] = document.getElementById('last-name').value;
-            updateUser["email"] = document.getElementById('email').value;
-            updateUser["password"] = $scope.user.password;
-            UserService
-                .updateUser($routeParams.uid, updateUser)
-                .success(function(user){
-                    if(user === '0') {
+            if(document.getElementById("myForm").checkValidity()) {
+                var updateUser = {};
+                updateUser["_id"] = userId;
+                updateUser["username"] = document.getElementById('username').value;
+                updateUser["firstName"] = document.getElementById('first-name').value;
+                updateUser["lastName"] = document.getElementById('last-name').value;
+                updateUser["email"] = document.getElementById('email').value;
+                updateUser["password"] = $scope.user.password;
+                UserService
+                    .updateUser($routeParams.uid, updateUser)
+                    .success(function (user) {
+                        if (user === '0') {
+                            console.log("error from profile update");
+                        }
+                    })
+                    .catch(function (error) {
                         console.log("error from profile update");
-                    }
+                    });
+            }
+        }
+
+        function unregisterUser(){
+            UserService
+                .deleteUser(userId)
+                .success(function(status){
+                    $location.url("/login");
                 })
                 .catch(function(error){
                     console.log("error from profile update");
                 });
         }
 
-        function unRegister(){
+        function logout(){
             UserService
-                .deleteUser(userId)
+                .logout()
                 .success(function(status){
                     $location.url("/login");
                 })

@@ -23,7 +23,11 @@
     <form>
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Header Name" value="{{widget.name}}">
+            <input name="name" type="text" class="form-control" required
+                   id="name" placeholder="Header Name" ng-model="widget.name">
+            <span ng-show="myForm.name.$invalid">
+                Please enter a name!
+            </span>
         </div>
         <div class="form-group">
             <label for="text">Text</label>

@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-dark bg-primary navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -9,7 +8,7 @@
             </div>
             <div class="col-xs-6 text-right">
                 <p class="navbar-text pull-right">
-                    <a ng-click="profile.updateUser()" class="navbar-link">
+                    <a ng-click="profile.updateUser()" type="submitted" class="navbar-link">
                       <span class="glyphicon glyphicon-ok">
                       </span>
                     </a>
@@ -19,33 +18,39 @@
     </div>
 </nav>
 
-<div class="container">
-    <form>
+<div class="container" ng-controller="ValidationController as model">
+    <form name="myForm" id="myForm" novalidate>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control" value="{{user.username}}"
+            <input name="username" ng-model="user.username" type="text" required class="form-control"
                    id="username" placeholder="Username">
+            <span ng-show="myForm.username.$invalid">
+                Please enter a username!
+            </span>
         </div>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" value="{{user.email}}"
+            <input name="email" type="email" ng-model="user.email" class="form-control"
                    id="email" placeholder="alice@wonderland.com">
+            <span ng-show="myForm.email.$invalid">
+                Please enter a valid email!
+            </span>
         </div>
         <div class="form-group">
             <label for="first-name">First Name</label>
-            <input type="text" class="form-control" value="{{user.firstName}}"
+            <input type="text" class="form-control" ng-model="user.firstName"
                    id="first-name" placeholder="Alice">
         </div>
         <div class="form-group">
             <label for="last-name">Last Name</label>
-            <input type="text" class="form-control" value="{{user.lastName}}"
+            <input type="text" class="form-control" ng-model="user.lastName"
                    id="last-name" placeholder="Wonderland">
         </div>
-    </form>
 
-    <a class="btn btn-primary btn-block" href="#/user/{{user._id}}/website">Websites</a>
-    <a class="btn btn-warning  btn-block" href="#/">Logout</a>
-    <a class="btn btn-danger  btn-block" ng-click="profile.unRegister()">UnRegister</a>
+        <a class="btn btn-primary btn-block" href="#/user/{{user._id}}/website">Websites</a>
+        <a class="btn btn-warning  btn-block" ng-click="profile.logout()">Logout</a>
+        <a class="btn btn-danger  btn-block" ng-click="profile.unregisterUser()">UnRegister</a>
+    </form>
 </div>
 
 <nav class="navbar navbar-dark bg-primary navbar-fixed-bottom">

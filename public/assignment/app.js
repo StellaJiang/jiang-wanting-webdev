@@ -4,5 +4,10 @@
 
 (function(){
     angular
-        .module("WebAppMaker",["ngRoute", "textAngular", "wamDirectives"]);
+        .module("WebAppMaker",["ngRoute", "textAngular", "wamDirectives", "passwordVerify"])
+        .controller("ValidationController", ValidationController);
+
+    function ValidationController(){
+        var vm = this;
+    }
 })();

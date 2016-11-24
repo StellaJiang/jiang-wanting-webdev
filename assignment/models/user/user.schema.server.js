@@ -11,6 +11,11 @@ module.exports = function(){
         password: String,
         firstName: String,
         lastName: String,
+        facebook: {
+            id:    String,
+            token: String,
+            displayName: String
+        },
         email: String,
         phone: String,
         websites: [webSchema],

@@ -8,6 +8,7 @@ module.exports = function(){
     var userModel = mongoose.model("userModel", userSchema);
 
     var api = {
+        findFacebookUser: findFacebookUser,
         createUser: createUser,
         findUserById: findUserById,
         updateUser: updateUser,
@@ -16,6 +17,11 @@ module.exports = function(){
         deleteUser: deleteUser
     };
     return api;
+
+    function findFacebookUser(facebookId) {
+        return userModel.findOne({'facebook.id': facebookId});
+
+    }
 
     function createUser (user) {
         return userModel.create(user);
@@ -48,7 +54,7 @@ module.exports = function(){
     }
 
     function findUserByUsername(username){
-        return userModel.find({
+        return userModel.findOne({
             username: username
         });
     }

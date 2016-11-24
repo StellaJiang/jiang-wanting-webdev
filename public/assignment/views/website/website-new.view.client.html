@@ -49,11 +49,15 @@
         </ul>
     </div>
 
-    <div class="col-xs-12 col-sm-8">
-        <form>
+    <div class="col-xs-12 col-sm-8" ng-controller="ValidationController as model">
+        <form name="myForm" id="myForm" novalidate>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Name">
+                <input name="name" type="text" ng-model="name" required
+                       class="form-control" id="name" placeholder="Name">
+                <span ng-show="myForm.name.$invalid">
+                    Please enter a name!
+                </span>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
