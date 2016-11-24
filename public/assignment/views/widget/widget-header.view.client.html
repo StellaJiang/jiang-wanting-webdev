@@ -37,6 +37,9 @@
             <label for="size">Size</label>
             <input type="number"  class="form-control" required min="1" max="6"
                    id="size" placeholder="3" value="{{widget.size}}">
+            <span ng-show="myForm.name.$invalid">
+                Please enter a header size!
+            </span>
         </div>
     </form>
     <a class="btn btn-danger  btn-block" ng-click="editWidget.deleteWidget()">Delete</a>
