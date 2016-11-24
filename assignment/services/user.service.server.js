@@ -41,7 +41,7 @@ module.exports = function(app, model) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
-/*    var facebookConfig = {
+    /*var facebookConfig = {
         clientID     : "371538036515694",
         clientSecret : "c7858cd0af1cb3491e14389522168ba9",
         callbackURL  : "http://localhost:3000/auth/facebook/callback"

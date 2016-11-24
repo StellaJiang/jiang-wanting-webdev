@@ -35,7 +35,8 @@
         </div>
         <div class="form-group">
             <label for="size">Size</label>
-            <input type="text"  class="form-control" id="size" placeholder="3" value="{{widget.size}}">
+            <input type="number"  class="form-control" required min="1" max="6"
+                   id="size" placeholder="3" value="{{widget.size}}">
         </div>
     </form>
     <a class="btn btn-danger  btn-block" ng-click="editWidget.deleteWidget()">Delete</a>

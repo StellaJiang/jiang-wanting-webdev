@@ -37,7 +37,6 @@
         vm.createUser = createUser;
 
         function createUser() {
-            console.log(document.getElementById("myForm").checkValidity());
             if(document.getElementById("myForm").checkValidity()) {
                 UserService
                     .register(vm.user)
