@@ -1,0 +1,54 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fliud">
+        <div class="navbar-header col-xs-6">
+            <a class="navbar-brand navtitle">My Movie</a>
+        </div>
+
+        <div class="navbar-right col-xs-6">
+            <a class="navbar-brand navname pull-right">Hello, {{user.username}}</a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="row row-offcanvas row-offcanvas-left" off-canvas-menu>
+    <div class="col-sm-3 col-md-2 sidebar-offcanvas toggle-nav" id="sidebar">
+        <ul class="nav nav-sidebar">
+            <li><a href="#/user/{{user._id}}"><i class="glyphicon glyphicon-cog"></i> My Account</a></li>
+            <li><a href="#/user/{{user._id}}/movie"><i class="glyphicon glyphicon-film"></i> Movies </a></li>
+            <li><a href="#/user/{{user._id}}/review"><i class="glyphicon glyphicon-comment"></i> My Review</a></li>
+            <li><a href="#/user/{{user._id}}/following"><i class="glyphicon glyphicon-user"></i> Following </a></li>
+            <li><a href="#/user/{{user._id}}/follower"><i class="glyphicon glyphicon-user"></i> Follower </a></li>
+            <li><a ng-click="model.logout()"><i class="glyphicon glyphicon-log-out"></i> Log out </a></li>
+        </ul>
+    </div>
+
+    <div class="col-sm-9 col-md-10">
+        <a class="pull-left visible-xs toggle-nav glyphicon glyphicon-menu-hamburger" ng-click="toggleMenu()"></a>
+
+        <br>
+        <div class="input-group">
+            <input ng-model="title" type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+                <button ng-click="model.searchMovieByTitle(title)" class="btn btn-default" type="button">Go!</button>
+            </span>
+        </div>
+
+        <br>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Poster</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="movie in model.movies">
+                <td><a href="#/user/{{user._id}}/movie/{{model.search}}/{{movie.imdbID}}">{{movie.Title}}</a></td>
+                <td>{{movie.Year}}</td>
+                <td><img ng-src="{{movie.Poster}}" height="100px"/></td>
+            </tr>
+        </table>
+        <br>
+    </div>
+</div>

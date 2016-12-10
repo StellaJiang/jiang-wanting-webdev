@@ -1,0 +1,106 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fliud">
+        <div class="navbar-header col-xs-6">
+            <a class="navbar-brand navtitle">My Movie</a>
+        </div>
+
+        <div class="navbar-right col-xs-6">
+            <a class="navbar-brand navname pull-right">Hello, {{user.username}}</a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="row row-offcanvas row-offcanvas-left" off-canvas-menu>
+    <div class="col-sm-3 col-md-2 sidebar-offcanvas toggle-nav" id="sidebar">
+        <ul class="nav nav-sidebar">
+            <li><a href="#/user/{{user._id}}"><i class="glyphicon glyphicon-cog"></i> My Account</a></li>
+            <li><a href="#/user/{{user._id}}/movie"><i class="glyphicon glyphicon-film"></i> Movies </a></li>
+            <li><a href="#/user/{{user._id}}/review"><i class="glyphicon glyphicon-comment"></i> My Review</a></li>
+            <li><a href="#/user/{{user._id}}/following"><i class="glyphicon glyphicon-user"></i> Following </a></li>
+            <li><a href="#/user/{{user._id}}/follower"><i class="glyphicon glyphicon-user"></i> Follower </a></li>
+            <li><a ng-click="model.logout()"><i class="glyphicon glyphicon-log-out"></i> Log out </a></li>
+        </ul>
+    </div>
+
+    <div class="col-sm-9 col-md-10">
+        <a class="pull-left visible-xs toggle-nav glyphicon glyphicon-menu-hamburger" ng-click="toggleMenu()"></a>
+        <a href="#/user/{{user._id}}/movie/{{model.search}}">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <h1 class="myTitle">{{model.movie.Title}}</h1>
+        <br>
+        <div class="row">
+            <div class="col-xs-6">
+                <div>
+                    <b>Directed By:</b> {{model.movie.Director}}
+                </div>
+                <div>
+                    <b>Writer:</b> {{model.movie.Writer}}
+                </div>
+                <div>
+                    <b>Rating:</b> {{model.movie.Rated}}
+                </div>
+                <div>
+                    <b>Released Date:</b> {{model.movie.Released}}
+                </div>
+                <div>
+                    <b>Time:</b> {{model.movie.Runtime}}
+                </div>
+                <div>
+                    <b>Language:</b> {{model.movie.Language}}
+                </div>
+                <div>
+                    <b>Country:</b> {{model.movie.Country}}
+                </div>
+                <div>
+                    <b>Actors:</b>
+                    <ul>
+                        <li ng-repeat="actor in model.movie.Actors.split(',')">
+                            {{actor}}
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <b>Plot:</b> {{model.movie.Plot}}
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <img ng-src="{{model.movie.Poster}}" height="300px"/>
+            </div>
+        </div>
+
+        <br>
+        <b>Reviews:</b>
+        <div>
+            <ul class="list-group">
+                <li ng-repeat="review in model.reviews" class="list-group-item">
+                    <div>
+                        <b>{{review.username}}</b>
+                        <a ng-if="review._user != user._id && user.following.indexOf(review._user) == -1"
+                           ng-click="model.addFriend(review._user, review.username)">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </div>
+                    <div>{{review.review}}</div>
+                </li>
+            </ul>
+        </div>
+
+        <form>
+            <div>
+                <label>Write a Review:</label>
+            </div>
+            <div>
+                <textarea class="form-control" ng-model="myReview" rows="6" placeholder="Review"></textarea>
+            </div>
+            <br>
+            <div>
+                <a class="btn btn-success" ng-click="model.writeReview(myReview)">Submit</a>
+            </div>
+        </form>
+        <br>
+    </div>
+
+
+</div>

@@ -49,52 +49,82 @@
             .when('/user/:uid/website', {
                 templateUrl: 'views/website/website-list.view.client.html',
                 controller: 'WebsiteListController',
-                controllerAs: 'websiteList'
+                controllerAs: 'websiteList',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
             .when('/user/:uid/website/new', {
                 templateUrl: 'views/website/website-new.view.client.html',
                 controller: 'NewWebsiteController',
-                controllerAs: 'newWebsite'
+                controllerAs: 'newWebsite',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
             .when('/user/:uid/website/:wid', {
                 templateUrl: 'views/website/website-edit.view.client.html',
                 controller: 'EditWebsiteController',
-                controllerAs: 'editWebsite'
+                controllerAs: 'editWebsite',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
             .when('/user/:uid/website/:wid/page', {
                 templateUrl: 'views/page/page-list.view.client.html',
                 controller: 'PageListController',
-                controllerAs: 'pageList'
+                controllerAs: 'pageList',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
             .when('/user/:uid/website/:wid/page/new', {
                 templateUrl: 'views/page/page-new.view.client.html',
                 controller: 'NewPageController',
-                controllerAs: 'newPage'
+                controllerAs: 'newPage',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
             .when('/user/:uid/website/:wid/page/:pid', {
                 templateUrl: 'views/page/page-edit.view.client.html',
                 controller: 'EditPageController',
-                controllerAs: 'editPage'
+                controllerAs: 'editPage',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
             .when('/user/:uid/website/:wid/page/:pid/widget', {
                 templateUrl: 'views/widget/widget-list.view.client.html',
                 controller: 'WidgetListController',
-                controllerAs: 'widgetList'
+                controllerAs: 'widgetList',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
             .when('/user/:uid/website/:wid/page/:pid/widget/new', {
                 templateUrl: 'views/widget/widget-chooser.view.client.html',
                 controller: 'NewWidgetController',
-                controllerAs: 'newWidget'
+                controllerAs: 'newWidget',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
             .when('/user/:uid/website/:wid/page/:pid/widget/:wgid', {
                 templateUrl: 'views/widget/widget-edit.view.client.html',
                 controller: 'EditWidgetController',
-                controllerAs: 'editWidget'
+                controllerAs: 'editWidget',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
             .when('/user/:uid/website/:wid/page/:pid/widget/:wgid/flicker', {
                 templateUrl: 'views/widget/widget-flickr-search.view.client.html',
                 controller:'FlickrController',
-                controllerAs:'flicker'
+                controllerAs:'flicker',
+                resolve: {
+                    checkLogin: checkLogin
+                }
             });
 
         function checkLogin($q, UserService, $location, $rootScope){

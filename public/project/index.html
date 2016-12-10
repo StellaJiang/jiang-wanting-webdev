@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Project Home Page</title>
-</head>
-<body>
-    <h1>Project Home Page</h1>
-</body>
+<html lang="en" ng-app="MovieApp">
+    <head>
+        <meta charset="UTF-8">
+        <title>Project Home Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="app.js"></script>
+        <script src="config.js"></script>
+
+        <!--load all controllers-->
+        <script src="views/user/user.controller.client.js"></script>
+        <script src="views/movies/movie.controller.client.js"></script>
+        <script src="views/reviews/review.controller.client.js"></script>
+        <script src="views/friends/friend.controller.client.js"></script>
+
+        <!--load all services-->
+        <script src="services/user.service.client.js"></script>
+        <script src="services/review.service.client.js"></script>
+        <script src="services/friend.service.client.js"></script>
+
+        <script src="directives/password-match.js"></script>
+        <script src="directives/offcanvas.js"></script>
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="css/style.css" rel="stylesheet"/>
+        <link href="css/offcanvas.css" rel="stylesheet"/>
+    </head>
+
+    <body>
+        <div class="container-fluid" ng-view>
+        </div>
+    </body>
 </html>

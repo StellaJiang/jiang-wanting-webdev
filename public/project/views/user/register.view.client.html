@@ -1,0 +1,68 @@
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand navtitle" href="#">My Movie</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" ng-controller="ValidationController as check">
+    <form name="myForm" id="myForm" novalidate>
+        <h1 class="myTitle">Welcome</h1>
+        <div class="inner-addon left-addon">
+            <i class="glyphicon glyphicon-user"></i>
+            <input name="username"
+                   type="text"
+                   class="form-control"
+                   required
+                   ng-model="model.user.username"
+                   placeholder="username"/>
+            <span ng-show="myForm.username.$invalid" class="error">
+                Please enter a username!
+            </span>
+        </div><br>
+        <div class="inner-addon left-addon">
+            <i class="glyphicon glyphicon-envelope"></i>
+            <input name="email"
+                   type="email"
+                   class="form-control"
+                   required
+                   ng-model="model.user.email"
+                   placeholder="email" />
+            <span ng-show="myForm.email.$invalid" class="error">
+                Please enter an email!
+            </span>
+        </div><br>
+        <div class="inner-addon left-addon">
+            <i class="glyphicon glyphicon-lock"></i>
+            <input name="password"
+                   type="password"
+                   class="form-control"
+                   required
+                   ng-model="model.user.password"
+                   placeholder="password"/>
+            <span ng-show="myForm.password.$invalid" class="error">
+            Please enter a password!
+        </span>
+        </div><br>
+        <div class="inner-addon left-addon">
+            <i class="glyphicon glyphicon-lock"></i>
+            <input name="verify"
+                   type="password"
+                   class="form-control"
+                   required
+                   ng-model="user.password_verify"
+                   placeholder="verify password"
+                   password-verify="model.user.password"/>
+            <span ng-show="myForm.verify.$error.required" class="error">
+                Please verify the password!
+            </span>
+                <span id="check" ng-show="myForm.verify.$error.passwordVerify" class="error">
+                Passwords do not match!
+            </span>
+        </div><br>
+        <button class="btn btn-primary btn-block" ng-disabled="!myForm.$valid" ng-click="model.createUser()">Sign up</button>
+        <a class="btn btn-danger  btn-block" href="#/login">Cancel</a>
+    </form>
+</div>

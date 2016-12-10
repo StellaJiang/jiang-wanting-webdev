@@ -1,0 +1,70 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fliud">
+        <div class="navbar-header col-xs-6">
+            <a class="navbar-brand navtitle">My Movie</a>
+        </div>
+
+        <div class="navbar-right col-xs-6">
+            <a class="navbar-brand navname pull-right">Hello, {{user.username}}</a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="row row-offcanvas row-offcanvas-left" off-canvas-menu>
+    <div class="col-sm-3 col-md-2 sidebar-offcanvas toggle-nav" id="sidebar">
+        <ul class="nav nav-sidebar">
+            <li><a href="#/admin/{{user._id}}/user"><i class="glyphicon glyphicon-user"></i> Users </a></li>
+            <li><a href="#/admin/{{user._id}}/review"><i class="glyphicon glyphicon-comment"></i> Reviews </a></li>
+            <li><a ng-click="model.logout()"><i class="glyphicon glyphicon-log-out"></i> Log out </a></li>
+        </ul>
+    </div>
+
+    <div class="col-sm-9 col-md-10" ng-controller="ValidationController as check">
+        <a class="pull-left visible-xs toggle-nav glyphicon glyphicon-menu-hamburger" ng-click="toggleMenu()"></a>
+        <br>
+        <form name="myForm" id="myForm" novalidate>
+            <h1 class="myTitle">User Detail</h1>
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon-user"></i>
+                <input name="username"
+                       type="text"
+                       class="form-control"
+                       required
+                       ng-model="model.detail.username"
+                       placeholder="username"/>
+                <span ng-show="myForm.username.$invalid" class="error">
+                    Please enter a username!
+                </span>
+            </div>
+            <br>
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon-info-sign"></i>
+                <input name="firstname"
+                       type="text"
+                       class="form-control"
+                       ng-model="model.detail.firstName"
+                       placeholder="Firstname"/>
+            </div><br>
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon-info-sign"></i>
+                <input name="lastname"
+                       type="text"
+                       class="form-control"
+                       ng-model="model.detail.lastName"
+                       placeholder="Lastname"/>
+            </div><br>
+            <div class="inner-addon left-addon">
+                <i class="glyphicon glyphicon-envelope"></i>
+                <input name="email"
+                       type="email"
+                       class="form-control"
+                       ng-model="model.detail.email"
+                       placeholder="email" />
+            </div><br>
+            <a class="btn btn-success btn-block" ng-click="model.updateProfile()">Update</a>
+            <a class="btn btn-danger btn-block" href="#/admin/{{user._id}}/user/{{model.detail._id}}/password">Change Password</a>
+            <a class="btn btn-warning btn-block" href="#/admin/{{user._id}}/user">Cancel</a>
+        </form>
+    </div>
+</div>

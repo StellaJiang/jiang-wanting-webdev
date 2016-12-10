@@ -1,0 +1,49 @@
+body {
+    padding-top: 53px;
+    height: 100%;
+}
+
+.inner-addon {
+    position: relative;
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+    position: absolute;
+    padding: 10px;
+    pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+.myTitle {
+    font-family:Apple Chancery;
+    text-align: center;
+}
+
+.navtitle {
+    font-family:Apple Chancery;
+}
+
+.navname {
+    font-family:Apple Chancery;
+    font-size: small;
+}
+
+.signup {
+    font-family:Apple Chancery;
+    text-align: center;
+}
+
+
+fieldset, label { margin: 0; padding: 0; }
+
+.error{
+    color: red;
+}
