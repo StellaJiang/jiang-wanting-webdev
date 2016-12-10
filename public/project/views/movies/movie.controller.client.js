@@ -8,11 +8,12 @@
         .controller("MovieListController", MovieListController)
         .controller("MovieDetailController", MovieDetailController);
 
-    function MovieListController($location, $routeParams, $scope, UserService, $http){
+    function MovieListController($location, $routeParams, $scope, $sce, UserService, $http){
         var vm = this;
 
         var userId = $routeParams.uid;
         vm.searchMovieByTitle = searchMovieByTitle;
+        vm.checkSafeImageUrl = checkSafeImageUrl;
         vm.logout = logout;
 
         function init() {
@@ -74,9 +75,13 @@
                     console.log("error from profile update");
                 });
         }
+
+        function checkSafeImageUrl(url){
+            return $sce.trustAsResourceUrl(url);
+        }
     }
 
-    function MovieDetailController($location, $routeParams, $route, $scope,
+    function MovieDetailController($location, $routeParams, $route, $scope, $sce,
                                    UserService, ReviewService, FriendService, $http) {
         var vm = this;
 
@@ -86,6 +91,7 @@
         vm.writeReview = writeReview;
         vm.addFriend = addFriend;
         vm.logout = logout;
+        vm.checkSafeImageUrl = checkSafeImageUrl;
 
         function init() {
             UserService
@@ -160,6 +166,10 @@
                 .catch(function (error) {
                     console.log("error from profile update");
                 });
+        }
+
+        function checkSafeImageUrl(url){
+            return $sce.trustAsResourceUrl(url);
         }
     }
 })();

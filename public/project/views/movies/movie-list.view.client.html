@@ -46,7 +46,7 @@
             <tr ng-repeat="movie in model.movies">
                 <td><a href="#/user/{{user._id}}/movie/{{model.search}}/{{movie.imdbID}}">{{movie.Title}}</a></td>
                 <td>{{movie.Year}}</td>
-                <td><img ng-src="{{movie.Poster}}" height="100px"/></td>
+                <td><img ng-src="model.checkSafeImageUrl({{movie.Poster}})" height="100px"/></td>
             </tr>
         </table>
         <br>
