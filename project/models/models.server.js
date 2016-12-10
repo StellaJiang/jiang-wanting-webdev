@@ -27,6 +27,6 @@ module.exports = function(){
         friendModel: friendModel
     };
 
-    userModel.createUser(admin);
+    //userModel.createUser(admin);
     return model;
 };

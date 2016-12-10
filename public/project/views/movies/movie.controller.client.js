@@ -32,7 +32,7 @@
 
             var title = $routeParams.title;
             if(title) {
-                var url = "http://www.omdbapi.com/?s=" + title;
+                var url = "https://www.omdbapi.com/?s=" + title;
                 $http
                     .get(url)
                     .success(function (result) {
@@ -46,7 +46,7 @@
 
         function searchMovieByTitle(title) {
             vm.search = title;
-            var url = "http://www.omdbapi.com/?s=" + title;
+            var url = "https://www.omdbapi.com/?s=" + title;
             $http
                 .get(url)
                 .success(function(result){
@@ -54,7 +54,7 @@
                     var num = totalResult / 10 + 1;
                     vm.movies = result.Search;
                     for(var i = 2; i <= num; i++) {
-                        var tempUrl = "http://www.omdbapi.com/?s=" + title + "&page=" + i;
+                        var tempUrl = "https://www.omdbapi.com/?s=" + title + "&page=" + i;
                         $http
                             .get(tempUrl)
                             .success(function(currResult){
@@ -102,7 +102,7 @@
                     console.log("error from profile");
                 });
 
-            var url = "http://www.omdbapi.com/?i=" + movieId + "&plot=full";
+            var url = "https://www.omdbapi.com/?i=" + movieId + "&plot=full";
             $http
                 .get(url)
                 .success(function(result){
