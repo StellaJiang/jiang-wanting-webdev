@@ -43,9 +43,10 @@
             }
         }
 
-    function RegisterController($location, UserService) {
+    function RegisterController($location, $scope, UserService) {
         var vm = this;
         vm.createUser = createUser;
+        $scope.errorShow = false;
 
         function createUser() {
             if(document.getElementById("myForm").checkValidity()) {
@@ -56,6 +57,7 @@
                         $location.url("/user/" + user._id);
                     })
                     .catch(function (error) {
+                        $scope.errorShow = true;
                         $location.url("/register");
                     });
             }

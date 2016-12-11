@@ -15,11 +15,11 @@ module.exports = function(){
     var reviewModel = require("./review/review.model.server")();
 
     var bcrypt = require("bcrypt-nodejs");
-    var admin = {
+    /*var admin = {
         "username": "admin",
         "password": bcrypt.hashSync("admin"),
         "admin": true
-    }
+    }*/
 
     var model = {
         userModel: userModel,
@@ -27,6 +27,6 @@ module.exports = function(){
         friendModel: friendModel
     };
 
-    userModel.createUser(admin);
+    //userModel.createUser(admin);
     return model;
 };
