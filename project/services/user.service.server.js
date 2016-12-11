@@ -31,17 +31,17 @@ module.exports = function(app, model) {
             failureRedirect: '/project/#/login'
         }));
 
-    /*var facebookConfig = {
+    var facebookConfig = {
      clientID     : "1203961226339249",
      clientSecret : "97ec48b717a64984b7bd1500d6b0563d",
      callbackURL  : "http://localhost:3000/auth/facebook/callback"
-     };*/
+     };
 
-    var facebookConfig = {
+    /*var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
         callbackURL  : process.env.FACEBOOK_CALLBACK_URL
-    };
+    };*/
     passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
 
     app.get('/api/users/all', getAllUsers);
