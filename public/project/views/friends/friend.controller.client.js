@@ -228,7 +228,7 @@
                     console.log("error from profile");
                 });
 
-            var url = "http://www.omdbapi.com/?i=" + movieId + "&plot=full";
+            var url = "https://www.omdbapi.com/?i=" + movieId + "&plot=full";
             $http
                 .get(url)
                 .success(function(result){

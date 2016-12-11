@@ -94,7 +94,7 @@
                 .success(function(review){
                     if(review != 0){
                         vm.review = review;
-                        var url = "http://www.omdbapi.com/?i=" + vm.review.movieId + "&plot=full";
+                        var url = "https://www.omdbapi.com/?i=" + vm.review.movieId + "&plot=full";
                         $http
                             .get(url)
                             .success(function(result){
