@@ -5,7 +5,7 @@
 
 module.exports = function(){
     var mongoose = require("mongoose");
-    var uri = "mongodb://stella:Jwt!19880906@ds033116.mlab.com:33116/movieApp";
+    var uri = "mongodb://stella:Jwt!19880906@ds129038.mlab.com:29038/mymovie";
     mongoose.connect(uri);
     //var connectionString = 'mongodb://127.0.0.1:27017/movieApp';
     //mongoose.connect(connectionString);
